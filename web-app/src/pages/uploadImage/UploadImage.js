@@ -3,22 +3,23 @@ import * as tf from "@tensorflow/tfjs";
 import { useDropzone } from "react-dropzone";
 import "./UploadImage.css";
 
+// assest imports
+import fileUpload from "../../assets/fileUpload.png";
+
 const url = {
   model: "model.json",
 };
 
 const baseStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
   borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
+  borderRadius: "2rem",
+  borderColor: "gray",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
   color: "#bdbdbd",
   transition: "border .3s ease-in-out",
+  padding: "3rem",
+  marginBottom: "2rem",
+  background: "#f9fafd",
 };
 
 const activeStyle = {
@@ -35,7 +36,6 @@ const rejectStyle = {
 
 const UploadImage = (props) => {
   const [model, setModel] = useState();
-  const fileInputRef = useRef();
 
   const loadModel = async (url) => {
     try {
@@ -102,7 +102,7 @@ const UploadImage = (props) => {
     isDragReject,
   } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: "image/jpeg, image/png, image/jpg",
   });
 
   const style = useMemo(
@@ -115,12 +115,6 @@ const UploadImage = (props) => {
     [isDragActive, isDragReject, isDragAccept]
   );
 
-  const thumbs = files.map((file) => (
-    <div key={file.name}>
-      <img src={file.preview} alt={file.name} />
-    </div>
-  ));
-
   useEffect(
     () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
@@ -129,16 +123,31 @@ const UploadImage = (props) => {
   );
 
   return (
-    <section>
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <div>Drag and drop your images here.</div>
+    <div className="uploadImage__container container d-flex justify-content-center">
+      <div className="uploadImage__dndContainer d-flex justify-content-center align-items-center flex-column">
+        <div className="uploadImage__dndTextDiv">
+          <p className="uploadImage__dndTextHeading my-0 fw-bolder text-center">
+            Upload your Files
+          </p>
+          <p className="uploadImage__dndTextSubHeading my-0 text-center">
+            File should be in jpeg, png or jpg
+          </p>
+        </div>
+        <div
+          className="uploadImage__dndPlaceDiv d-flex justify-content-center align-items-center flex-column"
+          {...getRootProps({ style })}
+        >
+          <input {...getInputProps()} />
+          <img src={fileUpload} alt="file upload logo" />
+          <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
+            Drag and Drop your files here
+          </p>
+        </div>
+        <button className="uploadImage__uploadBtn" onClick={handleUploadImage}>
+          Upload Image
+        </button>
       </div>
-      <aside>{thumbs}</aside>
-      <button className="uploadImage" onClick={handleUploadImage}>
-        Upload Image
-      </button>
-    </section>
+    </div>
   );
 };
 
