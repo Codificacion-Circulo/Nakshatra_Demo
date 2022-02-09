@@ -45,3 +45,15 @@
     border-radius: 1rem;
     font-weight: bold;
 }
+
+.uploadImage__resultDiv {
+    margin: 2rem 0;
+    width: 40%;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: #f4f7fe;
+}
+
+.uploadImage__resultDiv p {
+    font-size: 1.5rem;
+}

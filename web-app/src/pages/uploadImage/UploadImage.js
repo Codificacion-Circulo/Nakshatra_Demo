@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import * as tf from "@tensorflow/tfjs";
 import { useDropzone } from "react-dropzone";
+import ResultDescCard from "../../components/resultDescCard/ResultDescCard";
 import "./UploadImage.css";
 
 // assest imports
@@ -36,6 +37,9 @@ const rejectStyle = {
 
 const UploadImage = (props) => {
   const [model, setModel] = useState();
+  const [files, setFiles] = useState([]);
+  const [result, setResult] = useState("");
+  const [modal, setModal] = useState(false);
 
   const loadModel = async (url) => {
     try {
@@ -53,8 +57,6 @@ const UploadImage = (props) => {
       loadModel(url);
     });
   }, []);
-
-  console.log(model);
 
   const handleUploadImage = () => {
     const file = files[0];
@@ -74,17 +76,18 @@ const UploadImage = (props) => {
         const offset = tf.scalar(255.0);
         const normalized = tensor.div(offset).expandDims(0);
         const predictions = model.predict(normalized);
-        const values = Array.from(predictions.dataSync());
+        // const values = Array.from(predictions.dataSync());
         var pIndex = tf.argMax(predictions, 1).dataSync();
         var classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
-        alert(classNames[pIndex]);
-        console.log(values);
+        // alert(classNames[pIndex]);
+        setResult(classNames[pIndex]);
       };
     };
+    setFiles([]);
   };
 
-  const [files, setFiles] = useState([]);
   const onDrop = useCallback((acceptedFiles) => {
+    setResult("");
     setFiles(
       acceptedFiles.map((file) =>
         Object.assign(file, {
@@ -122,8 +125,12 @@ const UploadImage = (props) => {
     [files]
   );
 
+  const modalChangeHandler = () => {
+    setModal(false);
+  };
+
   return (
-    <div className="uploadImage__container container d-flex justify-content-center">
+    <div className="uploadImage__container container d-flex flex-column align-items-center">
       <div className="uploadImage__dndContainer d-flex justify-content-center align-items-center flex-column">
         <div className="uploadImage__dndTextDiv">
           <p className="uploadImage__dndTextHeading my-0 fw-bolder text-center">
@@ -137,16 +144,26 @@ const UploadImage = (props) => {
           className="uploadImage__dndPlaceDiv d-flex justify-content-center align-items-center flex-column"
           {...getRootProps({ style })}
         >
-          <input {...getInputProps()} />
+          <input {...getInputProps()} className="uploadInput" />
           <img src={fileUpload} alt="file upload logo" />
           <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
             Drag and Drop your files here
           </p>
         </div>
+        {files.length > 0 && (
+          <p className="text-success">File Uploaded Successfully</p>
+        )}
         <button className="uploadImage__uploadBtn" onClick={handleUploadImage}>
-          Upload Image
+          Check Image
         </button>
       </div>
+      {result && (
+          <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
+            <p className="text-center fw-bolder">Your result is: {result}</p>
+            <button className="uploadImage__uploadBtn" onClick={() => {setModal(true)}}>Know More</button>
+          </div>
+      )}
+      {modal && <ResultDescCard onClose={modalChangeHandler} />}
     </div>
   );
 };
