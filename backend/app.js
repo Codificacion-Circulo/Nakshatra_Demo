@@ -75,13 +75,6 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-app.get('/', async (_, res) => {
-  try {
-      res.send('<h1>Status:Online</h1>');
-  } catch (e) {
-      res.status(500).send();
-  }
-});
 app.use('/api/users', userRouter);
 
 
