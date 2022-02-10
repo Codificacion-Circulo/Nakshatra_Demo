@@ -1,7 +1,7 @@
 import "./LandingPage.css";
 
 // assets imports
-import landingPageBg from "../../assets/landingPageBg.png";
+import landingPageBg from "../../../assets/laptop-work.jpg";
 
 const LandingPage = () => {
   return (

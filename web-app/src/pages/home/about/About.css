@@ -1,0 +1,44 @@
+.about__container {
+  margin: 3rem auto;
+}
+
+.about__sectionHeading {
+  margin: 2rem 0;
+}
+
+.about__sectionHeading p {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #064848;
+  border-bottom: 3px solid #064848;
+}
+
+.about__containerDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+.about__infoContainer {
+  width: 40%;
+}
+
+.about__infoTextHeading p{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #064848;
+}
+
+.about__infoTextPara p {
+    font-size: 1.2rem;
+}
+
+.about__imgDiv {
+  padding: 2rem;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(6, 72, 72, 1) 50%
+  );
+  border-radius: 20px;
+}
