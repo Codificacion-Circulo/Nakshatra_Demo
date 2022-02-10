@@ -4,8 +4,8 @@
   "description": "Image Detection in Medical Field",
   "main": "app.js",
   "scripts": {
-    "start": "./node_modules/.bin/env-cmd -f ./config.env nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js",
+    "dev": "./node_modules/.bin/env-cmd -f ./config.env nodemon server.js",
+    "start": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
   },
   "author": "Deepak Kumar",
