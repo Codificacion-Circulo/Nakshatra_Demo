@@ -12,7 +12,10 @@ const reportSchema = new mongoose.Schema(
     },
     result: {
       type: String,
-      lowercase: true,
+      enum: {
+        values: ['covid', 'pneumonia', 'tuberculosis', 'normal'],
+        message: 'Invalid Reuslt Provided'
+      },
       required: [true, 'Please Provide a Result']
     },
     user: {
