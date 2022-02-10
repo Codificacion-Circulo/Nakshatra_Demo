@@ -58,18 +58,13 @@ app.use(mongoSanitize());
 
 app.use(xss());
 
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price'
-    ]
-  })
-);
+app.use(hpp());
+  // hpp({
+  //   whitelist: [
+      
+  //   ]
+  // })
+// );
 
 app.use(compression());
 
@@ -81,7 +76,7 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 
-app.use('/api/v1/users', userRouter);
+app.use('/api/users', userRouter);
 
 
 app.all('*', (req, res, next) => {
