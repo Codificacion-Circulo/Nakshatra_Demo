@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
-tourSchema.virtual('reports', {
+userSchema.virtual('reports', {
   ref: 'Report',
   foreignField: 'user',
   localField: '_id'
