@@ -50,7 +50,11 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
-
+tourSchema.virtual('reports', {
+  ref: 'Report',
+  foreignField: 'user',
+  localField: '_id'
+});
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
