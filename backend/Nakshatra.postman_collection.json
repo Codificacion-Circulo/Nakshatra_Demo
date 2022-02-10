@@ -6,7 +6,49 @@
 	},
 	"item": [
 		{
-			"name": "SignUp",
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code===200){",
+							"    pm.environment.set('authToken',pm.response.json().token)",
+							"    console.log(pm.response.json().token)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\":\"deepak.2002.02.16@gmail.com\",\n    \"password\":\"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/users/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
 			"event": [
 				{
 					"listen": "test",
@@ -48,16 +90,13 @@
 			"response": []
 		},
 		{
-			"name": "Login",
+			"name": "Post Report",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"if(pm.response.code===200){",
-							"    pm.environment.set('authToken',pm.response.json().token)",
-							"    console.log(pm.response.json().token)",
-							"}"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -68,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"deepak.2002.02.16@gmail.com\",\n    \"password\":\"1234567890\"\n}",
+					"raw": "{\n    \"image\":\"www.google.com\",\n    \"result\":\"normal\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,14 +115,42 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/users/login",
+					"raw": "{{url}}/api/reports",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"users",
-						"login"
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Report",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/reports",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"reports"
 					]
 				}
 			},
