@@ -1,47 +1,47 @@
-/* .landingPage__container {
-    border: 2px solid red;
+.landingPage__container {
+  width: 100%;
 }
 
 .landingPage__rowContainer {
-    border: 2px solid yellow;
-} */
-
-.landingPage__bgContainer img {
-    width: 100%;
+  --bs-gutter-x: 0;
 }
 
 .landingPage__bgInfoContainer {
-    background: #d8efed;
+  background: #d8efed;
+}
+
+.landingPage__bgContainer img {
+  width: 100%;
 }
 
 .landingPage__bgInfo {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .landingPage__smallPHeading p {
-    font-size: 1.2rem;
-    color: #445f8e;
+  font-size: 1.2rem;
+  color: #477961;
 }
 
 .landingPage__heading {
-    color: #064848;
-    font-size: 3rem;
-    font-weight: bold;
+  color: #064848;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .landingPage__subHeading {
-    color: #064848;
-    font-size: 2.5rem;
+  color: #064848;
+  font-size: 2.5rem;
 }
 
 .landingPage__checkBtn {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 
-.landingPage__checkBtn button{
-    background: #064848;
-    color: #fff;
-    border-radius: 2rem;
-    padding: 1rem 1.5rem;
-    border: none;
+.landingPage__checkBtn button {
+  background: #064848;
+  color: #fff;
+  border-radius: 2rem;
+  padding: 1rem 1.5rem;
+  border: none;
 }

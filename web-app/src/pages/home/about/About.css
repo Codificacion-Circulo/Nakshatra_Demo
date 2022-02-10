@@ -1,5 +1,6 @@
 .about__container {
   margin: 3rem auto;
+  margin-bottom: 5rem;
 }
 
 .about__sectionHeading {
@@ -10,7 +11,14 @@
   font-size: 3rem;
   font-weight: bold;
   color: #064848;
-  border-bottom: 3px solid #064848;
+  /* border-bottom: 3px solid #064848; */
+}
+
+.about__borderDiv {
+  margin: 5px 0;
+  width: 55px;
+  height: 3px;
+  background-color: #064848;
 }
 
 .about__containerDiv {

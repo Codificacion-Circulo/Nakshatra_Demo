@@ -6,8 +6,9 @@ import aboutImg from "../../../assets/about1.jpg";
 const About = () => {
   return (
     <div className="about__container container d-flex flex-column align-items-center justify-content-center">
-      <div className="about__sectionHeading">
+      <div className="about__sectionHeading d-flex flex-column align-items-center justify-content-cente">
         <p className="my-0">About Us</p>
+        <div className="about__borderDiv"></div>
       </div>
       <div className="about__containerDiv">
         <div className="about__infoContainer">
