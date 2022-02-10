@@ -21,12 +21,12 @@ app.enable('trust proxy');
 
 
 
-app.use(cors());
+// app.use(cors());
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
-// app.use(cors({
-//   origin: 'https://www.natours.com'
-// }))
+app.use(cors({
+  origin: 'http://localhost:3001'
+}))
 
 app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
