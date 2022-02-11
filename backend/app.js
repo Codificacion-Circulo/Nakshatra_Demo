@@ -19,14 +19,17 @@ const app = express();
 app.enable('trust proxy');
 
 
-
+const corsOptions ={
+  origin:'https://localhost:3000', 
+  credentials:true,
+  sameSite: 'none',            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
 
 // app.use(cors());
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
-app.use(cors({
-  origin: 'http://localhost:3001'
-}))
+app.use(cors(corsOptions));
 
 app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
