@@ -3,6 +3,7 @@ import "./Home.css";
 import About from "./about/About";
 import { Fragment } from "react";
 import Categories from "./categories/Categories";
+import Problem from "./problems/Problem";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <LandingPage />
       <About />
       <Categories />
+      <Problem />
     </Fragment>
   );
 };
