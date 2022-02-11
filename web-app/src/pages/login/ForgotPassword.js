@@ -6,11 +6,10 @@ import axios from 'axios';
 import './style.css'
 toast.configure();
 
-function Login() {
+function ForgotPassword() {
     const [loading, setLoading] = useState(false)
     const [details, setdetails] = useState({
-        email: "",
-        password: ""
+        email: ""
     })
     const handleSumbit = async (event) => {
         event.preventDefault()
@@ -19,19 +18,16 @@ function Login() {
             const data = details;
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/login',
+                    'https://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
                     data
                 )
-            if(response){
-                console.log(response)
-                localStorage.setItem('token', response.data.token);
-            }
+            console.log(response)
             setdetails({
                 email: "",
                 password: ""
             })
             setLoading(false)
-            toast.success("Login Success !", {
+            toast.success("Mail Sent", {
                 position: toast.POSITION.TOP_CENTER
             });
         } catch (error) {
@@ -48,17 +44,13 @@ function Login() {
             <div className='container'>
                 <form onSubmit={handleSumbit}>
 
-                    <h3>Log in</h3>
+                    <h3>Forgot Password</h3>
 
                     <div className="form-group">
                         <label>Email</label>
                         <input type="email" className="form-control" placeholder="Enter email" value={details.email} onChange={(e) => setdetails({ ...details, email: e.target.value })} required />
                     </div>
 
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter password" value={details.password} onChange={(e) => setdetails({ ...details, password: e.target.value })} required />
-                    </div>
 
                     {/* <div className="form-group">
     <div className="custom-control custom-checkbox">
@@ -67,9 +59,9 @@ function Login() {
     </div>
 </div> */}
 
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
+                    <button type="submit" className="btn btn-dark btn-lg btn-block">Send Reset Link</button>
                     <p className="forgot-password text-right">
-                        Forgot <a href="/forgotPassword">password?</a>
+                        Forgot <a href="#">password?</a>
                     </p>
                 </form>
             </div>
@@ -77,4 +69,4 @@ function Login() {
     );
 }
 
-export default Login
+export default ForgotPassword

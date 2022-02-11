@@ -5,6 +5,9 @@ import Profile from "./pages/profile/Profile";
 import UploadImage from "./pages/uploadImage/UploadImage";
 import Login from './pages/login/Login';
 import SignUp from './pages/login/SignUp';
+import ForgotPassword from "./pages/login/ForgotPassword";
+import ResetPassword from "./pages/login/ResetPassword";
+import History from "./pages/history/History";
 
 const Routes = () => {
     return (
@@ -20,12 +23,23 @@ const Routes = () => {
                     <Route path="/profile">
                         <Profile />
                     </Route>
+                    <Route path="/history">
+                        <History />
+                    </Route>
+
                     <Route path="/login">
                         <Login />
                     </Route>
                     <Route path="/signup">
                         <SignUp />
                     </Route>
+                    <Route path="/forgotPassword">
+                        <ForgotPassword />
+                    </Route>
+                    <Route path="/resetPassword/:id">
+                        <ResetPassword />
+                    </Route>
+                    
                 </Switch>
             </Layout>
         </BrowserRouter>
