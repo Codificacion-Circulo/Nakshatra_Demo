@@ -16,7 +16,7 @@ const reportRouter= require('./routes/reportRoutes')
 // Start express app
 const app = express();
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
 
 
 const corsOptions ={
@@ -34,7 +34,7 @@ app.use(cors(corsOptions));
 // app.options('/api/v1/tours/:id', cors());
 
 // Set security HTTP headers
-app.use(helmet());
+// app.use(helmet());
 
 
 if (process.env.NODE_ENV === 'development') {
