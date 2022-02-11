@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import Routes from "./Routes";
 import alanBtn from "@alan-ai/alan-sdk-web";
+import Mapp from "./components/maps/Mapp"
 
 function App() {
   const alanBtnContainer = useRef();
@@ -27,6 +28,7 @@ function App() {
       <div className="App">
         <div ref={alanBtnContainer}></div>
       </div>
+      <Mapp />
     </Fragment>
   );
 }
