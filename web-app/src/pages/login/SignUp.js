@@ -52,7 +52,7 @@ function SignUp() {
         }
     }
     return (
-        <Fragment>
+        <div className='bg'>
             {loading && <LoadingSpinner />}
             <div className="container">
                 <form onSubmit={handleSumbit}>
@@ -84,7 +84,7 @@ function SignUp() {
                     </p>
                 </form>
             </div>
-        </Fragment>
+        </div>
     );
 }
 

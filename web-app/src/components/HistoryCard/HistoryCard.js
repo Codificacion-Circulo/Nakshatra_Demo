@@ -1,26 +1,42 @@
-import React from 'react'
-import { MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-function HistoryCard() {
+import React, {useEffect,useState} from 'react'
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBCardFooter,MDBCol } from 'mdb-react-ui-kit';
+function HistoryCard(props) {
+  const [rDay, setRDay] = useState(0);
+  const [rHour, setRHour] = useState(0);
+  const [rMin, setRMin] = useState(0);
+  function getTime() {
+    const endTime = props&&props.data && props.data.createdAt;
+    const time = new Date(endTime).getTime() - Date.now();
+    const seconds = Math.abs(time / 1000);
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    setRDay(d)
+    setRHour(h)
+    setRMin(m)
+  }
+  useEffect(() => {
+    const i = setInterval(getTime, 1000);
+    return () => clearInterval(i);
+  }, [props,rDay, rHour, rMin]);
+  const d=props&&props.data&& new Date(props.data.createdAt)
+  console.log(d)
   return (
-    <MDBCard style={{ maxWidth: '540px' }}>
-    <MDBRow className='g-0'>
-      <MDBCol md='4'>
-        <MDBCardImage src='https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.webp' alt='...' fluid />
-      </MDBCol>
-      <MDBCol md='8'>
-        <MDBCardBody>
-          <MDBCardTitle>Card title</MDBCardTitle>
-          <MDBCardText>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This
-            content is a little bit longer.
-          </MDBCardText>
-          <MDBCardText>
-            <small className='text-muted'>Last updated 3 mins ago</small>
-          </MDBCardText>
-        </MDBCardBody>
-      </MDBCol>
-    </MDBRow>
-  </MDBCard>
+    <MDBCol md='4' >
+    <MDBCard className='h-100 rounded mb-0 p-1 mx-auto' style={{ maxWidth: '18rem' }} >
+        <MDBCardImage className='h-100 rounded mb-0 mx-auto' src={props&&props.data&&props.data.image} fluid alt={props&&props.data&&props.data.result} style={{maxWidth:'16rem',maxHeight:'15.2rem'}} />
+      <MDBCardBody alignment='left'>
+        <MDBCardTitle style={{textTransform:'capitalize'}}>{props&&props.data&&props.data.result}</MDBCardTitle>
+        <MDBCardText>
+        {props&&props.data&&props.data.result==='normal'?(`Everything was found normal according to our prediciton.`):(`Our prediction led to the discovery of ${props&&props.data&&props.data.result}.`)}
+        </MDBCardText>
+        {/* <MDBBtn href='#'>Get Report</MDBBtn> */}
+      </MDBCardBody>
+      <MDBCardFooter>
+            <small className='text-muted'>Last updated {rDay>0&&rDay+' day'} {rHour>0&&rHour+' hour'} {rMin>0&&rMin+' mins'}  ago</small>
+          </MDBCardFooter>
+    </MDBCard>
+  </MDBCol>
   )
 }
 

@@ -1,77 +1,87 @@
-import { useState } from "react"
-import "./Header.css"
 import logo from '../../assets/logo.png'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
-import {useLocation} from 'react-router-dom'
-import {toast} from 'react-toastify';
+import "./Header.css"
+import React,{ useEffect,useState} from 'react'
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import {
+  MDBNavbar,
+  MDBContainer,
+  MDBIcon,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBNavbarToggler,
+  MDBNavbarBrand,
+  MDBCollapse
+} from 'mdb-react-ui-kit';
+import { useLocation } from 'react-router-dom'
 toast.configure();
 const Header = () => {
-  const location=useLocation();
-  const [loading, setLoading] = useState(false)
-  const pathname=location.pathname;
-  const handleLogout=async (e)=>{
-    e.preventDefault();
-    setLoading(false)
-    try {
-      
-      await fetch("https://nakshatra-demo.herokuapp.com/api/users/logout")
-      setLoading(false)
-    toast.success("Logout Success", {
-      position: toast.POSITION.TOP_CENTER
-  });
-    } catch (error) {
-      console.log(error)
-            setLoading(false)
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_RIGHT
+  const location = useLocation();
+  const pathname = location.pathname;
+  console.log(pathname)
+  const [showNavColor, setShowNavColor] = useState(false);
+  const [details,setDetails]=useState({})
+  useEffect(() => {
+    const getTodo = () => {
+
+        const token=localStorage.getItem('token');
+        axios
+            .get('https://nakshatra-demo.herokuapp.com/api/users/me', { headers: {"Authorization" : `Bearer ${token}`} ,withCredentials: true })
+            .then((response) => {
+                console.log(response.data.data.data);
+                setDetails(response.data)
+            })
+            .catch((e) => {
+                console.log('something went wrong :(', e);
+                toast.error(e.message, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             });
-    }
-    
-  }
+    };
+    getTodo();
+}, []);
   return (
     <>
-    {loading&&<LoadingSpinner/>}
-      <Navbar variant="dark" className="px-5">
-        <Navbar.Brand href="/">
+      <MDBNavbar expand='lg' dark className="bgs">
+        <MDBNavbarBrand href='/' >
           <img
-            alt=""
             src={logo}
-            width="100"
-            height="80"
-            className="d-inline-block align-top"
-          />{' '}
-          Neural Descent
-        </Navbar.Brand>
-        <Container className="justify-content-center">
-          <Nav className="justify-content-end" activeKey={location&&location.pathname&&pathname}>
-            <Nav.Item>
-              <Nav.Link href="/upload">Upload</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/history">History</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Container>
-        <Nav>
-          <Navbar.Brand href="#home">
-            <img
-              alt=""
-              src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
-              width="40"
-              height="40"
-              className="d-inline-block rounded-circle"
-            />{' '}
-            <NavDropdown title="Abhay Lal" id="nav-dropdown" className="d-inline-block">
-              <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-              <NavDropdown.Item href="/signup">SignUp</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item>
-            </NavDropdown>
-          </Navbar.Brand>
-        </Nav>
-      </Navbar>
+            height='80'
+            alt=''
+            loading='lazy'
+          />
+          Alveoli
+        </MDBNavbarBrand>
+        <MDBContainer fluid>
+          <MDBNavbarToggler
+            type='button'
+            data-target='#navbarColor02'
+            aria-controls='navbarColor02'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+            onClick={() => setShowNavColor(!showNavColor)}
+          >
+            <MDBIcon icon='bars' fas />
+          </MDBNavbarToggler>
+          <MDBCollapse show={showNavColor} center navbar>
+            <MDBNavbarNav className='justify-content-end mb-2 mb-lg-0 px-5'>
+              <MDBNavbarItem className="mx-4">
+                <MDBNavbarLink href='/upload' active={"/upload" === pathname}>Upload</MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem className="mx-4">
+                <MDBNavbarLink href='/whitepaper' active={"/whitepaper" === pathname}>WhitePaper</MDBNavbarLink>
+              </MDBNavbarItem>
+              {details.data?(<MDBNavbarItem className="mx-4">
+                <MDBNavbarLink href='/profile' active={"/profile" === pathname}>Profile</MDBNavbarLink>
+              </MDBNavbarItem>):(<MDBNavbarItem className="mx-4">
+                <MDBNavbarLink href='/login' active={"/whitepaper" === pathname}>Login</MDBNavbarLink>
+              </MDBNavbarItem>)}
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBContainer>
+      </MDBNavbar>
     </>
   );
 };

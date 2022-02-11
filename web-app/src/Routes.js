@@ -7,7 +7,6 @@ import Login from './pages/login/Login';
 import SignUp from './pages/login/SignUp';
 import ForgotPassword from "./pages/login/ForgotPassword";
 import ResetPassword from "./pages/login/ResetPassword";
-import History from "./pages/history/History";
 
 const Routes = () => {
     return (
@@ -22,9 +21,6 @@ const Routes = () => {
                     </Route>
                     <Route path="/profile">
                         <Profile />
-                    </Route>
-                    <Route path="/history">
-                        <History />
                     </Route>
 
                     <Route path="/login">
