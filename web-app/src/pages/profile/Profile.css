@@ -2,13 +2,8 @@
   margin: 0 auto;
   /* border: 2px solid yellow; */
   padding: 2rem;
-  background: rgb(6, 72, 72);
-  background: linear-gradient(
-    90deg,
-    rgba(6, 72, 72, 1) 0%,
-    rgba(100, 147, 146, 1) 100%
-  );
-  color: #fff;
+  background: #d8efed;
+  color: rgb(0, 0, 0);
 }
 
 .profile__sectionHeading {
@@ -83,7 +78,7 @@
 
 .profile__submitBtn button {
     padding: 0.5rem 1rem;
-    border-radius: 2rem;
+    border-radius: 4px;
     border: none;
     background: #064848;
     color: #d8efed;
@@ -94,6 +89,21 @@
     color: #064848;
     background: #d8efed;
     transition: all 0.3s ease-out;
+}
+
+.profile__submitBtnd button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: #d9534f;
+  color: #d8efed;
+  transition: all 0.3s ease-out;
+}
+
+.profile__submitBtnd button:hover {
+  color: #d9534f;
+  background: #d8efed;
+  transition: all 0.3s ease-out;
 }
 
 

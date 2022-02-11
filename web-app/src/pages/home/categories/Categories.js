@@ -17,15 +17,15 @@ const Categories = () => {
             <p className="categories__serialInfo my-0">1</p>
             <p className="categories__name mb-0">Covid</p>
           </div>
-          <div class="categories__columnContainerDiv col d-flex">
+          <div className="categories__columnContainerDiv col d-flex">
             <p className="categories__serialInfo my-0">2</p>
             <p className="categories__name mb-0">Pneumonia</p>
           </div>
-          <div class="categories__columnContainerDiv col d-flex">
+          <div className="categories__columnContainerDiv col d-flex">
             <p className="categories__serialInfo my-0">3</p>
             <p className="categories__name mb-0">Tuberculosis</p>
           </div>
-          <div class="categories__columnContainerDiv col d-flex">
+          <div className="categories__columnContainerDiv col d-flex">
             <p className="categories__serialInfo my-0">4</p>
             <p className="categories__name mb-0">Normal</p>
           </div>

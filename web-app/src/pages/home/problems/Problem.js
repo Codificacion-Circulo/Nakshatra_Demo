@@ -12,38 +12,38 @@ const Problem = () => {
       </div>
       <div className="problem__infoTextHeading d-flex justify-content-center"><p>About Alveoli</p></div>
       <div className="problem__containerDiv">
-          <div class="problem__cardsDiv  card" style={{width: "22rem"}}>
-            <img src={Problem1} class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3">Early Detection</h5>
-              <p class="card-text">
-                Early Detection without the need of a doctor which helps in saving millions of lives.
-              </p>
-            </div>
-          </div>
-
-
-          <div class="problem__cardsDiv  card" style={{width: "22rem"}}>
-            <img src={Problem2} class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3">Faster Results</h5>
-              <p class="card-text">
-              Able to detect Covid-19 faster than most RTPCR tests within seconds.
-              </p>
-            </div>
-          </div>
-
-
-          <div class="problem__cardsDiv  card" style={{width: "22rem"}}>
-            <img src={Problem3} class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3">Ease of Access</h5>
-              <p class="card-text">
-                Readily available to any patient in the world with a click of a button.
-              </p>
-            </div>
+        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+          <img src={Problem1} className="card-img-top" alt="..." />
+          <div className="card-body">
+            <h5 className="card-title text-center fs-3">Early Detection</h5>
+            <p className="card-text">
+              Early Detection without the need of a doctor which helps in saving millions of lives.
+            </p>
           </div>
         </div>
+
+
+        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+          <img src={Problem2} className="card-img-top" alt="..." />
+          <div className="card-body">
+            <h5 className="card-title text-center fs-3">Faster Results</h5>
+            <p className="card-text">
+              Able to detect Covid-19 faster than most RTPCR tests within seconds.
+            </p>
+          </div>
+        </div>
+
+
+        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+          <img src={Problem3} className="card-img-top" alt="..." />
+          <div className="card-body">
+            <h5 className="card-title text-center fs-3">Ease of Access</h5>
+            <p className="card-text">
+              Readily available to any patient in the world with a click of a button.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

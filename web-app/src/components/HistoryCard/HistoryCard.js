@@ -19,8 +19,6 @@ function HistoryCard(props) {
     const i = setInterval(getTime, 1000);
     return () => clearInterval(i);
   }, [props,rDay, rHour, rMin]);
-  const d=props&&props.data&& new Date(props.data.createdAt)
-  console.log(d)
   return (
     <MDBCol md='4' >
     <MDBCard className='h-100 rounded mb-0 p-1 mx-auto' style={{ maxWidth: '18rem' }} >
