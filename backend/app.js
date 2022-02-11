@@ -21,7 +21,8 @@ app.enable('trust proxy');
 
 const corsOptions ={
   origin:'https://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
+  credentials:true,
+  sameSite: 'none',            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
 
