@@ -1,6 +1,8 @@
+import { useHistory } from "react-router-dom";
 import "./Categories.css";
 
 const Categories = () => {
+  const history = useHistory()
   return (
     <div className="categories__container d-flex flex-column align-items-center justify-content-center">
       <div className="categories__sectionHeading d-flex flex-column align-items-center justify-content-center">
@@ -31,7 +33,7 @@ const Categories = () => {
         </div>
       </div>
       <div className="categories__uploadBtn">
-        <button>Check Your X-ray</button>
+        <button onClick={() => {history.push("/upload")}}>Check Your X-ray</button>
       </div>
     </div>
   );

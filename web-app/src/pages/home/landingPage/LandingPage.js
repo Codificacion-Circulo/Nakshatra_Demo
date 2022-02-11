@@ -1,9 +1,11 @@
+import {useHistory} from 'react-router-dom';
 import "./LandingPage.css";
 
 // assets imports
 import landingPageBg from "../../../assets/laptop-work.jpg";
 
 const LandingPage = () => {
+  const history = useHistory()
   return (
     <div className="landingPage__container">
       <div className="landingPage__rowContainer row">
@@ -20,7 +22,7 @@ const LandingPage = () => {
               <p>Online Medical Services</p>
             </div>
             <div className="landingPage__checkBtn">
-                <button>Check your X-ray</button>
+                <button onClick={() => {history.push("/upload")}}>Check your X-ray</button>
             </div>
           </div>
         </div>
