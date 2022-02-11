@@ -38,14 +38,22 @@
     padding-top: 1rem;
 }
 
-.categories__uploadBtn button{
+.categories__uploadBtn {
+    margin-bottom: 2rem;
+}
+
+.categories__checkBtnLink {
     border: none;
     padding: 1rem 1.5rem;
     border-radius: 2rem;
     background-color: #d8efed;
     color: #064848;
     font-weight: bold;
-    margin-bottom: 2rem;
+    text-decoration: none;
+}
+
+.categories__checkBtnLink:hover {
+    color: #064848;
 }
 
 /* .categories__predictionBox {

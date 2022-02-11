@@ -38,12 +38,17 @@
   margin: 1rem 0;
 }
 
-.landingPage__checkBtn button {
+.landingPage__checkBtnLink {
   background: #064848;
   color: #fff;
   border-radius: 2rem;
   padding: 1rem 1.5rem;
   border: none;
+  text-decoration: none;
+}
+
+.landingPage__checkBtnLink:hover {
+  color: #fff;
 }
 
 @media only screen and (max-width: 1400px) {
@@ -78,7 +83,7 @@
     font-size: 1.2rem;
   }
 
-  .landingPage__checkBtn button {
+  .landingPage__checkBtnLink {
     font-size: 0.8rem;
   }
 
@@ -106,7 +111,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .landingPage__checkBtn button {
+  .landingPage__checkBtnLink {
     padding: 0.5rem 1rem;
   }
 }
@@ -132,7 +137,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .landingPage__checkBtn button {
+  .landingPage__checkBtnLink {
     padding: 1rem 1.5rem;
     font-size: 1rem;
   }
