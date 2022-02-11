@@ -1,12 +1,38 @@
+import { useState } from "react"
 import "./Header.css"
 import logo from '../../assets/logo.png'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import {useLocation} from 'react-router-dom'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure();
 const Header = () => {
   const location=useLocation();
+  const [loading, setLoading] = useState(false)
   const pathname=location.pathname;
+  const handleLogout=async (e)=>{
+    e.preventDefault();
+    setLoading(false)
+    try {
+      
+      await fetch("https://nakshatra-demo.herokuapp.com/api/users/logout")
+      setLoading(false)
+    toast.success("Logout Success", {
+      position: toast.POSITION.TOP_CENTER
+  });
+    } catch (error) {
+      console.log(error)
+            setLoading(false)
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+    }
+    
+  }
   return (
     <>
+    {loading&&<LoadingSpinner/>}
       <Navbar variant="dark" className="px-5">
         <Navbar.Brand href="/">
           <img
@@ -41,7 +67,7 @@ const Header = () => {
               <NavDropdown.Item href="/login">Login</NavDropdown.Item>
               <NavDropdown.Item href="/signup">SignUp</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/logout">LogOut</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>LogOut</NavDropdown.Item>
             </NavDropdown>
           </Navbar.Brand>
         </Nav>

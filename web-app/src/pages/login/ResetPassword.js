@@ -1,37 +1,44 @@
 import React, { useState, Fragment } from 'react'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import './style.css'
 toast.configure();
 
-function Login() {
+function ResetPassword() {
+    const params = useParams();
     const [loading, setLoading] = useState(false)
     const [details, setdetails] = useState({
-        email: "",
-        password: ""
+        password: "",
+        passwordConfirm: ""
     })
     const handleSumbit = async (event) => {
         event.preventDefault()
         setLoading(true);
         try {
             const data = details;
+            if (!(data.password === data.passwordConfirm)) {
+                setLoading(false)
+                toast.warn("Password Do Not Match !", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+
+                return
+            }
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/login',
+                    `https://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`,
                     data
                 )
-            if(response){
-                console.log(response)
-                localStorage.setItem('token', response.data.token);
-            }
+            console.log(response)
             setdetails({
-                email: "",
-                password: ""
+                password: "",
+                passwordConfirm: ""
             })
             setLoading(false)
-            toast.success("Login Success !", {
+            toast.success("Password Reset !", {
                 position: toast.POSITION.TOP_CENTER
             });
         } catch (error) {
@@ -48,16 +55,15 @@ function Login() {
             <div className='container'>
                 <form onSubmit={handleSumbit}>
 
-                    <h3>Log in</h3>
-
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input type="email" className="form-control" placeholder="Enter email" value={details.email} onChange={(e) => setdetails({ ...details, email: e.target.value })} required />
-                    </div>
-
+                    <h3>Password Reset</h3>
                     <div className="form-group">
                         <label>Password</label>
                         <input type="password" className="form-control" placeholder="Enter password" value={details.password} onChange={(e) => setdetails({ ...details, password: e.target.value })} required />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" className="form-control" placeholder="Enter password" value={details.passwordConfirm} onChange={(e) => setdetails({ ...details, passwordConfirm: e.target.value })} required />
                     </div>
 
                     {/* <div className="form-group">
@@ -67,7 +73,7 @@ function Login() {
     </div>
 </div> */}
 
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
+                    <button type="submit" className="btn btn-dark btn-lg btn-block">Reset Password</button>
                     <p className="forgot-password text-right">
                         Forgot <a href="/forgotPassword">password?</a>
                     </p>
@@ -77,4 +83,4 @@ function Login() {
     );
 }
 
-export default Login
+export default ResetPassword
