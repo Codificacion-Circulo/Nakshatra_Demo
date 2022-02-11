@@ -7,28 +7,18 @@ const About = () => {
   return (
     <div className="about__container d-flex flex-column align-items-center justify-content-center">
       <div className="about__sectionHeading d-flex flex-column align-items-center justify-content-cente">
-        <p className="my-0">About Us</p>
+        <p className="my-0">What We Do ?</p>
         <div className="about__borderDiv"></div>
       </div>
       <div className="about__containerDiv">
         <div className="about__infoContainer">
-          <div className="about__infoTextHeading"><p>About Alice Hope MD</p></div>
+          <div className="about__infoTextHeading"><p>About Alveoli</p></div>
           <div className="about__infoTextPara">
             <p>
-              I'm a paragraph. Click here to add your own text and edit me. It’s
-              easy. Just click “Edit Text” or double click me to add your own
-              content and make changes to the font. Feel free to drag and drop
-              me anywhere you like on your page. I’m a great place for you to
-              tell a story and let your users know a little more about you.
+            This project helps users check their Chest X-Ray reports in a matter of seconds.We have created a secure Chest X-Ray image classification based website and app that can detect Covid-19, Pneumonia and Tuberculosis. Deep Learning has been used to detect the disease by using a Convolutional Neural Network(MobileNetV2) which performs classification
             </p>
             <p>
-              This is a great space to write a long text about your company and
-              your services. You can use this space to go into a little more
-              detail about your company. Talk about your team and what services
-              you provide. Tell your visitors the story of how you came up with
-              the idea for your business and what makes you different from your
-              competitors. Make your company stand out and show your visitors
-              who you are.
+            The user can login and upload an image of the Chest X-Ray which will be safely secured on Blockchain.The result of Chest X-Ray shall be given within seconds. In our website we have integrated Alan AI to provide a smooth workflow for all.The user can also view a history of their medical chest X-Ray reports which can be downloaded in the form of a pdf.
             </p>
           </div>
         </div>

@@ -28,7 +28,7 @@ function App() {
       <div className="App">
         <div ref={alanBtnContainer}></div>
       </div>
-      <Mapp />
+      {/* <Mapp /> */}
     </Fragment>
   );
 }

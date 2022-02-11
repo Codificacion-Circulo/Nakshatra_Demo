@@ -16,9 +16,9 @@ const LandingPage = () => {
             <div className="landingPage__smallPHeading">
               <p>Reliabe and Accessible to all</p>
             </div>
-            <div className="landingPage__heading">Alice Hope MD</div>
+            <div className="landingPage__heading">Alveoli</div>
             <div className="landingPage__subHeading">
-              <p>Online Medical Services</p>
+              <p>Online X-ray Centre</p>
             </div>
             <div className="landingPage__checkBtn">
                 <Link to="/upload" className="landingPage__checkBtnLink">Check your X-ray</Link>
