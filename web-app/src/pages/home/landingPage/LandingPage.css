@@ -45,3 +45,95 @@
   padding: 1rem 1.5rem;
   border: none;
 }
+
+@media only screen and (max-width: 1400px) {
+  .landingPage__bgInfo {
+    padding: 0;
+  }
+  .landingPage__heading {
+    font-size: 2.5rem;
+  }
+  
+  .landingPage__subHeading {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .landingPage__heading {
+    font-size: 2rem;
+  }
+  
+  .landingPage__subHeading {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .landingPage__heading {
+    font-size: 1.5rem;
+  }
+  
+  .landingPage__subHeading {
+    font-size: 1.2rem;
+  }
+
+  .landingPage__checkBtn button {
+    font-size: 0.8rem;
+  }
+
+  .landingPage__checkBtn {
+    margin: 0.5rem 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .landingPage__heading {
+    font-size: 1.2rem;
+  }
+  
+  .landingPage__subHeading {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  
+  .landingPage__subHeading p {
+    margin-bottom: 0;
+  }
+
+  .landingPage__smallPHeading p {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .landingPage__checkBtn button {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .landingPage__bgInfoContainer {
+    padding: 2rem;
+  }
+  .landingPage__heading {
+    font-size: 2.5rem;
+  }
+  
+  .landingPage__subHeading {
+    font-size: 1.5rem;
+  }
+  
+  .landingPage__subHeading p {
+    margin-bottom: 1rem;
+  }
+
+  .landingPage__smallPHeading p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .landingPage__checkBtn button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}

@@ -7,10 +7,10 @@ const LandingPage = () => {
   return (
     <div className="landingPage__container">
       <div className="landingPage__rowContainer row">
-        <div className="landingPage__bgContainer col-8">
+        <div className="landingPage__bgContainer col-lg-8 col-md-7 col-sm-6">
           <img src={landingPageBg} alt="Background image" />
         </div>
-        <div className="landingPage__bgInfoContainer col-4 d-flex justify-content-center align-items-center">
+        <div className="landingPage__bgInfoContainer col-lg-4 col-md-5 col-sm-6 d-flex justify-content-center align-items-center">
           <div className="landingPage__bgInfo d-flex flex-column  justify-content-center">
             <div className="landingPage__smallPHeading">
               <p>Reliabe and Accessible to all</p>
