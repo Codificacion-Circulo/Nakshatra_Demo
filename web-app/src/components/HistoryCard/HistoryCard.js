@@ -43,7 +43,7 @@ function HistoryCard(props) {
     {props&&props.data&&props.data.result==='normal'?(`Everything was found normal according to our prediciton.`):(`Our prediction led to the discovery of ${props&&props.data&&props.data.result}.`)}
     </p>
   </div>
-  <div class="card-footer text-dark">
+  <div className="card-footer text-dark">
   <small className='text-dark'>Last updated {rDay>0&&rDay+' day'} {rHour>0&&rHour+' hour'} {rMin>0&&rMin+' mins'}  ago</small>
   </div>
 </div>

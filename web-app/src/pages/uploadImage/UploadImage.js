@@ -66,7 +66,6 @@ const UploadImage = (props) => {
   const handleUploadImage =async () => {
     try {
       const file = files[0];
-      console.log(file)
       const classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
       var result= 0;
       const reader = new FileReader();

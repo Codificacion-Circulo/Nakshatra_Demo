@@ -1,4 +1,4 @@
-import {configureStore, createSlice} from "@reduxjs/toolkit";
+import {configureStore, createSlice,getDefaultMiddleware} from "@reduxjs/toolkit";
 
 const authInitialState = {
     user: {
@@ -29,9 +29,7 @@ const authSlice = createSlice({
 })
 
 export const authAction = authSlice.actions
-
-const store = configureStore({
-    reducer: authSlice.reducer
+export default configureStore({
+    reducer: authSlice.reducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 })
-
-export default store

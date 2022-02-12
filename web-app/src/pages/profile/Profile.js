@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { authAction } from "../../store";
+import { create } from 'ipfs-http-client';
+const client = create('https://ipfs.infura.io:5001/api/v0')
 toast.configure();
 const Profile = () => {
   const [loading, setLoading] = useState(false)
@@ -20,6 +22,18 @@ const Profile = () => {
     email: "",
     photo: ""
   })
+  const captureFile = async (e) => {
+    setLoading(true)
+    let file = e.target.files[0];
+    const token = localStorage.getItem('token');
+      if(token){
+        const added = await client.add({path:file.name,content:file},{
+          wrapWithDirectory: true,
+        })
+        const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
+        setUser({...user,photo:url});
+    setLoading(false)
+   } };
   const handleDelete = async (event) => {
     event.preventDefault()
     setLoading(true);
@@ -87,11 +101,13 @@ const Profile = () => {
     getTodo();
   }, []);
   useEffect(() => {
-    setUser({
-      name: authCtx.name,
-      email: authCtx.email,
-      photo: authCtx.photo
-    })
+    if((authCtx.name!=="")&&(authCtx.email!=="")&&(authCtx.photo!=="")){
+      setUser({
+        name: authCtx.name,
+        email: authCtx.email,
+        photo: authCtx.photo
+      })
+    }
   }, [authCtx.name, authCtx.email, authCtx.photo])
   return (
     <>
@@ -109,17 +125,9 @@ const Profile = () => {
                 id="profileImage"
                 type="file"
                 accept="image/*"
+                onChange={captureFile}
               />
-              <label htmlFor="profileImage" className="profile__imgLabel">
-                {user && user.photo ? (
-                  <div
-                    className="select-asset-image"
-                    style={{ backgroundImage: `url(${user && user.photo})` }}
-                  ></div>
-                ) : (
-                  <i className="fas fa-image"></i>
-                )}
-              </label>
+              <label htmlFor="profileImage" className="profile__imgLabel"  style={{ backgroundImage: `url(${user && user.photo})`}}></label>
             </div>
             <div className="profile__inputContainer col-6">
               <div className="profile__inputDiv mb-3">
@@ -128,7 +136,7 @@ const Profile = () => {
                   type="text"
                   className="form-control"
                   id="username"
-                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                  onChange={(e) => setUser((prevState)=>{ return {...prevState, name: e.target.value }})}
                   value={user && user.name}
                 />
               </div>
@@ -140,13 +148,13 @@ const Profile = () => {
                   type="email"
                   className="form-control"
                   id="email"
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  value={user && user.email}
+                  value={authCtx && authCtx.email}
+                  disabled={true}
                   aria-describedby="emailHelp"
                 />
               </div>
               <div className="profile__submitBtn d-inline">
-                <button type="submit" onClick={handleSubmit} className="m-1 fw-bolder">Submit</button>
+                <button type="submit" onClick={handleSubmit} className="m-1 fw-bolder">Save Changes</button>
               </div>
               <div className="profile__submitBtnd d-inline">
                 <button type="button" onClick={handleDelete} className="m-1 fw-bolder">Delete Account</button>
