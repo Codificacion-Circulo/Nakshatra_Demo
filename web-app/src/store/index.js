@@ -2,6 +2,7 @@ import {configureStore, createSlice,getDefaultMiddleware} from "@reduxjs/toolkit
 
 const authInitialState = {
     user: {
+        _id:"",
         name: "",
         email: "",
         photo: ""
