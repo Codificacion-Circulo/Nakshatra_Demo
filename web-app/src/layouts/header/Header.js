@@ -1,9 +1,11 @@
 import logo from '../../assets/logo.png';
+import pddf from '../../assets/whitepaper.pdf'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import "./Header.css";
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import fileDownload from 'js-file-download';
 import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBNavbar,
@@ -108,7 +110,7 @@ const Header = () => {
                 <MDBNavbarLink href='/upload' active={"/upload" === pathname}>Upload</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem className="mx-4">
-                <MDBNavbarLink href='/whitepaper' active={"/whitepaper" === pathname}>WhitePaper</MDBNavbarLink>
+                <MDBNavbarLink href={pddf} download>WhitePaper</MDBNavbarLink>
               </MDBNavbarItem>
               {authCtx && authCtx.name ?
               (<Fragment>

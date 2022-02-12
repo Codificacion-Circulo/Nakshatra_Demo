@@ -1,12 +1,4 @@
 
-.bg{
-  background: rgb(6, 72, 72);
-  background: linear-gradient(
-    90deg,
-    rgba(6, 72, 72, 1) 0%,
-    rgba(100, 147, 146, 1) 100%
-  );
-}
 
 .outer .form-control:focus {
   border-color: #167bff;
