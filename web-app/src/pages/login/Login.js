@@ -1,11 +1,11 @@
-import React, { useState, Fragment } from 'react'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+import React, { useState, Fragment } from 'react';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import './style.css'
+import './style.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {authAction} from "../../store"
+import { authAction } from "../../store";
 toast.configure();
 
 function Login() {
@@ -14,7 +14,6 @@ function Login() {
         email: "",
         password: ""
     })
-
     const authCtx = useSelector(state => state.user)
     const dispatch = useDispatch()
 
@@ -25,11 +24,11 @@ function Login() {
             const data = details;
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/login',
+                    'http://nakshatra-demo.herokuapp.com/api/users/login',
                     data
                 )
-            if(response){
-                dispatch(authAction.setData(response.data))
+            if (response) {
+                dispatch(authAction.updateData(response.data))
             }
             setdetails({
                 email: "",
@@ -64,13 +63,6 @@ function Login() {
                         <label>Password</label>
                         <input type="password" className="form-control" placeholder="Enter password" value={details.password} onChange={(e) => setdetails({ ...details, password: e.target.value })} required />
                     </div>
-
-                    {/* <div className="form-group">
-    <div className="custom-control custom-checkbox">
-        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-    </div>
-</div> */}
 
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
                     <p className="forgot-password text-right">

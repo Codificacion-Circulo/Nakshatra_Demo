@@ -13,8 +13,7 @@ const authSlice = createSlice({
     initialState: authInitialState,
     reducers: {
         setData: (state, action) => {
-            state.user = action.payload.data.user
-            localStorage.setItem('token', JSON.stringify(action.payload.token))
+            state.user = action.payload.data
         },
         removeData: (state, action) => {
             state.user = null
@@ -23,7 +22,7 @@ const authSlice = createSlice({
         updateData: (state, action) => {
             state.user = action.payload.user
             localStorage.removeItem('token')
-            localStorage.setItem('token', JSON.stringify(action.payload.token))
+            localStorage.setItem('token', action.payload.token)
         }
     }
 })

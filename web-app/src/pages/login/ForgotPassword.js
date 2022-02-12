@@ -18,18 +18,19 @@ function ForgotPassword() {
             const data = details;
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
+                    'http://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
                     data
                 )
             console.log(response)
             setdetails({
-                email: "",
-                password: ""
+                email: ""
             })
+            if (response) {
+                toast.success(response.data.message, {
+                    position: toast.POSITION.TOP_CENTER
+                });
+            }
             setLoading(false)
-            toast.success("Mail Sent", {
-                position: toast.POSITION.TOP_CENTER
-            });
         } catch (error) {
             console.log(error)
             setLoading(false)
@@ -50,15 +51,6 @@ function ForgotPassword() {
                         <label>Email</label>
                         <input type="email" className="form-control" placeholder="Enter email" value={details.email} onChange={(e) => setdetails({ ...details, email: e.target.value })} required />
                     </div>
-
-
-                    {/* <div className="form-group">
-    <div className="custom-control custom-checkbox">
-        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-    </div>
-</div> */}
-
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Send Reset Link</button>
                     <p className="forgot-password text-right">
                         Forgot <a href="#">password?</a>
