@@ -8,7 +8,6 @@ import SignUp from './pages/login/SignUp';
 import ForgotPassword from "./pages/login/ForgotPassword";
 import ResetPassword from "./pages/login/ResetPassword";
 import KnowMore from "./pages/knowMore/KnowMore";
-
 const Routes = () => {
     return (
         <BrowserRouter>
@@ -17,25 +16,25 @@ const Routes = () => {
                     <Route path="/" exact>
                         <Home />
                     </Route>
-                    <Route path="/upload">
+                    <Route path="/upload" exact>
                         <UploadImage />
                     </Route>
-                    <Route path="/profile">
+                    <Route path="/profile" exact>
                         <Profile />
                     </Route>
-                    <Route path="/k">
+                    <Route path="/knowmore">
                         <KnowMore />
                     </Route>
-                    <Route path="/login">
+                    <Route path="/login" exact>
                         <Login />
                     </Route>
-                    <Route path="/signup">
+                    <Route path="/signup" exact>
                         <SignUp />
                     </Route>
-                    <Route path="/forgotPassword">
+                    <Route path="/forgotPassword" exact>
                         <ForgotPassword />
                     </Route>
-                    <Route path="/resetPassword/:id">
+                    <Route path="/resetPassword/:id" exact>
                         <ResetPassword />
                     </Route>
                     

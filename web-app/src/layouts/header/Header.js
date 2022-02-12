@@ -24,7 +24,6 @@ const Header = () => {
   const pathname = location.pathname;
   console.log(pathname)
   const [showNavColor, setShowNavColor] = useState(false);
-  const [details, setDetails] = useState({})
   const authCtx = useSelector(state => state.user)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -33,11 +32,10 @@ const Header = () => {
     const getTodo = () => {
       console.log(`Authorization Bearer ${token}`)
       axios
-        .get('http://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+        .get('https://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
         .then((response) => {
           console.log(response.data.data.data);
           dispatch(authAction.setData(response.data.data))
-          setDetails(response.data)
         })
         .catch((e) => {
           console.log('something went wrong :(', e);

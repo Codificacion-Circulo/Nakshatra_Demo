@@ -31,7 +31,7 @@ function ResetPassword() {
                 });
                 return
             }
-            const response = await axios.patch(`http://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`, data);
+            const response = await axios.patch(`https://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`, data);
             if (response) {
                 dispatch(authAction.updateData(response.data))
             }

@@ -46,6 +46,7 @@
     margin: 1rem 2rem;
     background: #d8efed;
     transition: all 0.3s ease-out;
+    margin-bottom: 2rem;
 }
 
 .problem__cardsDiv:hover {

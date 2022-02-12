@@ -1,12 +1,13 @@
-import React, { useState, Fragment } from 'react'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
-import authAction from "../../store"
+import {authAction} from "../../store"
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import './style.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 toast.configure();
+
 function SignUp() {
     const [loading, setLoading] = useState(false)
     const [details, setdetails] = useState({
@@ -34,11 +35,14 @@ function SignUp() {
             }
             const response = await axios
                 .post(
-                    'http://nakshatra-demo.herokuapp.com/api/users/signup',
+                    'https://nakshatra-demo.herokuapp.com/api/users/signup',
                     data
                 )
             if (response) {
                 dispatch(authAction.updateData(response.data))
+                toast.success(`Welcome ${response.data.data.user.name}`, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             }
             setdetails({
                 name: "",
@@ -47,10 +51,7 @@ function SignUp() {
                 passwordConfirm: ""
             })
             setLoading(false)
-            toast.success("SignUp Success !", {
-                position: toast.POSITION.TOP_CENTER
-            });
-
+            window.location = "/upload";
         } catch (error) {
             console.log(error)
             setLoading(false)

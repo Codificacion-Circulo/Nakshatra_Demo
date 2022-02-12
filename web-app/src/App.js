@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     alanBtn({
-      key: process.env.REACT_APP_ALAN_SDK_KEY,
+      key: "16e640254ab52f4aa02148c35fd8d1c92e956eca572e1d8b807a3e2338fdd0dc/stage",
       rootEl: alanBtnContainer.current,
       onCommand: (commandData) => {
         console.log(commandData);
