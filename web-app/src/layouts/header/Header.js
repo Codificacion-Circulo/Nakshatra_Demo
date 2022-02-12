@@ -60,19 +60,16 @@ const Header = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const getTodo = () => {
-      setLoading(true);
       axios
         .get('https://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
         .then((response) => {
           dispatch(authAction.setData(response.data.data));
         })
-        setLoading(false)
         .catch((e) => {
           console.log(e);
           toast.error(e.response.data.message, {
             position: toast.POSITION.TOP_RIGHT
           });
-          setLoading(false)
         });
     };
     if (token) {
