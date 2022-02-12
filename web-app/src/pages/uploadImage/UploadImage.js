@@ -220,18 +220,20 @@ const UploadImage = (props) => {
             Check Image
           </button>
         </div>
+
         {result && (
           <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
             <p className="text-center fw-bolder">
               Your Chest X-Ray is classfied as {result}
             </p>
-            <Link
+          {result && result!=="normal" &&            
+           <Link
               to={`/knowmore/${result && result}`}
               className="uploadImage__uploadBtn"
               style={{ textDecoration: "none" }}
             >
               Know More
-            </Link>
+            </Link>}
           </div>
         )}
       </div>
