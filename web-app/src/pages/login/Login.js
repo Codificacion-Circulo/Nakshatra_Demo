@@ -25,7 +25,7 @@ function Login() {
             const data = details;
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/login',
+                    'http://nakshatra-demo.herokuapp.com/api/users/login',
                     data
                 )
             if(response){

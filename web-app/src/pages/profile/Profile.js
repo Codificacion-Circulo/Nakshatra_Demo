@@ -20,8 +20,8 @@ const Profile = () => {
     const getTodo = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const reqOne = axios.get('https://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
-      const reqTwo = axios.get('https://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+      const reqOne = axios.get('http://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+      const reqTwo = axios.get('http://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
       axios.all([reqOne, reqTwo]).then(axios.spread((...responses) => {
         setDetails(responses[1].data)
         setUser(responses[0].data.data.data)

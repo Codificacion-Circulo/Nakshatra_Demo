@@ -34,7 +34,7 @@ function SignUp() {
             }
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/signup',
+                    'http://nakshatra-demo.herokuapp.com/api/users/signup',
                     data
                 )
             console.log(response)

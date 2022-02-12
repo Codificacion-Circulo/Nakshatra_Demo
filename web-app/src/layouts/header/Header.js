@@ -28,7 +28,7 @@ const Header = () => {
 
         const token=localStorage.getItem('token');
         axios
-            .get('https://nakshatra-demo.herokuapp.com/api/users/me', { headers: {"Authorization" : `Bearer ${token}`} ,withCredentials: true })
+            .get('http://nakshatra-demo.herokuapp.com/api/users/me', { headers: {"Authorization" : `Bearer ${token}`} ,withCredentials: true })
             .then((response) => {
                 console.log(response.data.data.data);
                 setDetails(response.data)

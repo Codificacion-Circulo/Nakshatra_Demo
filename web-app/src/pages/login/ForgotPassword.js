@@ -18,7 +18,7 @@ function ForgotPassword() {
             const data = details;
             const response = await axios
                 .post(
-                    'https://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
+                    'http://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
                     data
                 )
             console.log(response)

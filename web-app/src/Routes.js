@@ -7,6 +7,7 @@ import Login from './pages/login/Login';
 import SignUp from './pages/login/SignUp';
 import ForgotPassword from "./pages/login/ForgotPassword";
 import ResetPassword from "./pages/login/ResetPassword";
+import KnowMore from "./pages/knowMore/KnowMore";
 
 const Routes = () => {
     return (
@@ -22,7 +23,9 @@ const Routes = () => {
                     <Route path="/profile">
                         <Profile />
                     </Route>
-
+                    <Route path="/k">
+                        <KnowMore />
+                    </Route>
                     <Route path="/login">
                         <Login />
                     </Route>

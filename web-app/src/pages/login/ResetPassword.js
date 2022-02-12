@@ -29,7 +29,7 @@ function ResetPassword() {
             }
             const response = await axios
                 .post(
-                    `https://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`,
+                    `http://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`,
                     data
                 )
             console.log(response)
