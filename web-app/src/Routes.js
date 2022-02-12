@@ -10,7 +10,6 @@ import ResetPassword from "./pages/login/ResetPassword";
 import KnowMore from "./pages/knowMore/KnowMore";
 const Routes = () => {
     return (
-        <BrowserRouter>
             <Layout>
                 <Switch>
                 <Route path='/' exact>
@@ -40,10 +39,8 @@ const Routes = () => {
                     <Route path="/resetPassword/:id" exact>
                         <ResetPassword />
                     </Route>
-                    
                 </Switch>
             </Layout>
-        </BrowserRouter>
     );
 }
 
