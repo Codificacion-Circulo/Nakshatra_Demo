@@ -30,11 +30,12 @@ const Profile = () => {
         )
       if (response) {
         dispatch(authAction.removeData())
+        toast.success("User Account Deleted", {
+          position: toast.POSITION.TOP_RIGHT
+        });
       }
       setLoading(false)
-      toast.success("User Account Deleted", {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      window.location = "/";
     } catch (error) {
       console.log(error)
       setLoading(false)
@@ -77,7 +78,7 @@ const Profile = () => {
         })
         .catch((e) => {
           console.log('something went wrong :(', e);
-          toast.error(e.message, {
+          toast.error(e.response.data.message, {
             position: toast.POSITION.TOP_RIGHT
           });
           setLoading(false)
