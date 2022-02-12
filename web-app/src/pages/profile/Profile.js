@@ -98,7 +98,7 @@ const Profile = () => {
       {loading && <LoadingSpinner />}
       <div className="profile__container d-flex flex-column align-items-center">
         <div className="profile__sectionHeading d-flex justify-content-center">
-          <p className="mb-0">Edit Profile</p>
+          <p className="mb-0" style={{color: "#064848"}}>Edit Profile</p>
         </div>
         <div className="profile__infoContainer row">
           <form>
@@ -157,7 +157,7 @@ const Profile = () => {
         </div>
 
       </div>
-      <MDBRow className='row-cols-1 row-cols-md-2 g-4 p-4'>
+      <MDBRow className='row-cols-1 row-cols-md-2 g-4 p-4 d-flex justify-content-center'>
         {details && details.results > 0 && details.data.data.map((el, index) => {
           return <HistoryCard key={index} data={el}></HistoryCard>
         })}

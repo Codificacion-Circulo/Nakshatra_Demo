@@ -20,21 +20,33 @@ function HistoryCard(props) {
     return () => clearInterval(i);
   }, [props,rDay, rHour, rMin]);
   return (
-    <MDBCol md='4' >
-    <MDBCard className='h-100 rounded mb-0 p-1 mx-auto' style={{ maxWidth: '18rem' }} >
-        <MDBCardImage className='h-100 rounded mb-0 mx-auto' src={props&&props.data&&props.data.image} fluid alt={props&&props.data&&props.data.result} style={{maxWidth:'16rem',maxHeight:'15.2rem'}} />
-      <MDBCardBody alignment='left'>
-        <MDBCardTitle style={{textTransform:'capitalize'}}>{props&&props.data&&props.data.result}</MDBCardTitle>
-        <MDBCardText>
-        {props&&props.data&&props.data.result==='normal'?(`Everything was found normal according to our prediciton.`):(`Our prediction led to the discovery of ${props&&props.data&&props.data.result}.`)}
-        </MDBCardText>
-        {/* <MDBBtn href='#'>Get Report</MDBBtn> */}
-      </MDBCardBody>
-      <MDBCardFooter>
-            <small className='text-muted'>Last updated {rDay>0&&rDay+' day'} {rHour>0&&rHour+' hour'} {rMin>0&&rMin+' mins'}  ago</small>
-          </MDBCardFooter>
-    </MDBCard>
-  </MDBCol>
+  //   <MDBCol md='4' >
+  //   <MDBCard className='h-100 rounded mb-0 mx-auto' style={{ maxWidth: '18rem' }} >
+  //       <MDBCardImage className='h-100 rounded mb-0 mx-auto' src={props&&props.data&&props.data.image} fluid alt={props&&props.data&&props.data.result} style={{maxWidth:'16rem',maxHeight:'15.2rem'}} />
+  //     <MDBCardBody alignment='left'>
+  //       <MDBCardTitle style={{textTransform:'capitalize'}}>{props&&props.data&&props.data.result}</MDBCardTitle>
+  //       <MDBCardText>
+  //       {props&&props.data&&props.data.result==='normal'?(`Everything was found normal according to our prediciton.`):(`Our prediction led to the discovery of ${props&&props.data&&props.data.result}.`)}
+  //       </MDBCardText>
+  //       {/* <MDBBtn href='#'>Get Report</MDBBtn> */}
+  //     </MDBCardBody>
+  //     <MDBCardFooter>
+  //           <small className='text-muted'>Last updated {rDay>0&&rDay+' day'} {rHour>0&&rHour+' hour'} {rMin>0&&rMin+' mins'}  ago</small>
+  //         </MDBCardFooter>
+  //   </MDBCard>
+  // </MDBCol>
+  <div className="problem__cardsDiv card history__card" style={{ width: "22rem", padding: "0" }}>
+  <img src={props&&props.data&&props.data.image} className="card-img-top" alt="..." height="250px"/>
+  <div className="card-body text-start">
+    <h5 className="card-title fs-3" style={{textTransform:'capitalize'}}>{props&&props.data&&props.data.result}</h5>
+    <p className="card-text">
+    {props&&props.data&&props.data.result==='normal'?(`Everything was found normal according to our prediciton.`):(`Our prediction led to the discovery of ${props&&props.data&&props.data.result}.`)}
+    </p>
+  </div>
+  <div class="card-footer text-dark">
+  <small className='text-dark'>Last updated {rDay>0&&rDay+' day'} {rHour>0&&rHour+' hour'} {rMin>0&&rMin+' mins'}  ago</small>
+  </div>
+</div>
   )
 }
 

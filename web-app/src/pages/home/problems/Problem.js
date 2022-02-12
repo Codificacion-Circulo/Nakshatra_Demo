@@ -12,7 +12,7 @@ const Problem = () => {
         <p className="my-0">What We Solve ?</p>
         <div className="problem__borderDiv"></div>
       </div>
-      <div className="problem__infoTextHeading d-flex justify-content-center"><p>About Alveoli</p></div>
+      <div className="problem__infoTextHeading d-flex justify-content-center"><p>Features</p></div>
       <div className="problem__containerDiv">
         <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
           <img src={Problem1} className="card-img-top" alt="..." />
