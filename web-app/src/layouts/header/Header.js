@@ -32,16 +32,15 @@ const Header = () => {
 
   const logOutHandler=async (event)=>{
     event.preventDefault();
-    const token = localStorage.getItem('token');
         setLoading(true);
         try {
+              const token = localStorage.getItem('token');
             const response = await axios
                 .get(
                     'https://nakshatra-demo.herokuapp.com/api/users/logout',
                     { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
                 );
             if (response) {
-              console.log(response)
                 dispatch(authAction.removeData());
                 toast.success(`Logout Success`, {
                     position: toast.POSITION.TOP_RIGHT

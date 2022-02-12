@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
@@ -13,9 +13,12 @@ const Routes = () => {
         <BrowserRouter>
             <Layout>
                 <Switch>
-                    <Route path="/" exact>
-                        <Home />
-                    </Route>
+                <Route path='/' exact>
+            <Redirect to='/home' />
+          </Route>
+          <Route path='/home' exact>
+            <Home />
+          </Route>
                     <Route path="/upload" exact>
                         <UploadImage />
                     </Route>

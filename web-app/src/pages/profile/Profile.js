@@ -16,7 +16,6 @@ const Profile = () => {
   const [details, setDetails] = useState({})
   const authCtx = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const token = localStorage.getItem('token');
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -38,6 +37,7 @@ const Profile = () => {
     event.preventDefault()
     setLoading(true);
     try {
+      const token = localStorage.getItem('token');
       const response = await axios
         .delete(
           'https://nakshatra-demo.herokuapp.com/api/users/deleteMe', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
@@ -62,6 +62,7 @@ const Profile = () => {
     event.preventDefault()
     setLoading(true);
     try {
+      const token = localStorage.getItem('token');
       const data = user;
       console.log(data)
       const response = await axios
@@ -86,6 +87,7 @@ const Profile = () => {
   useEffect(() => {
     const getTodo = () => {
       setLoading(true);
+      const token = localStorage.getItem('token');
       axios.get('https://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
         .then((response) => {
           setDetails(response.data)
