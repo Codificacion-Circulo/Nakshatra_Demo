@@ -20,7 +20,7 @@ app.enable('trust proxy');
 
 
 const corsOptions ={
-  origin:['https://localhost:3000','https://nakshatra.netlify.app'], 
+  origin:['https://localhost:3000','https://alveoli.netlify.app'], 
   credentials:true,
   sameSite: 'none',            //access-control-allow-credentials:true
   optionSuccessStatus:200
