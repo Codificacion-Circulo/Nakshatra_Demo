@@ -3,6 +3,8 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
+import authAction from "../../store"
 import './style.css'
 toast.configure();
 function SignUp() {
@@ -13,6 +15,10 @@ function SignUp() {
         password: "",
         passwordConfirm: ""
     })
+
+    const authCtx = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
     const handleSumbit = async (event) => {
         event.preventDefault()
         setLoading(true);
@@ -32,6 +38,9 @@ function SignUp() {
                     data
                 )
             console.log(response)
+            if(response){
+                dispatch(authAction.setData(response.data))
+            }
             setdetails({
                 name: "",
                 email: "",

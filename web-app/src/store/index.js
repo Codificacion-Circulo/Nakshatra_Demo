@@ -1,9 +1,11 @@
 import {configureStore, createSlice} from "@reduxjs/toolkit";
 
-const token = JSON.parse(localStorage.getItem('token'))
-
 const authInitialState = {
-    data: token ? token : null
+    user: {
+        name: "",
+        email: "",
+        photo: ""
+    }
 }
 
 const authSlice = createSlice({
@@ -11,25 +13,25 @@ const authSlice = createSlice({
     initialState: authInitialState,
     reducers: {
         setData: (state, action) => {
-            state.data = action.payload
-            localStorage.setItem('token', JSON.stringify(state.data))
+            state.user = action.payload.data.user
+            localStorage.setItem('token', JSON.stringify(action.payload.token))
         },
         removeData: (state, action) => {
-            state.data = null
-            localStorage.clear()
+            state.user = null
+            localStorage.removeItem('token')
         },
         updateData: (state, action) => {
-            state.data = action.payload
+            state.user = action.payload.user
             localStorage.removeItem('token')
-            localStorage.setItem('token', JSON.stringify(state.data))
+            localStorage.setItem('token', JSON.stringify(action.payload.token))
         }
     }
 })
 
+export const authAction = authSlice.actions
+
 const store = configureStore({
-    reducer: {
-        auth: authSlice.reducer
-    }
+    reducer: authSlice.reducer
 })
 
 export default store

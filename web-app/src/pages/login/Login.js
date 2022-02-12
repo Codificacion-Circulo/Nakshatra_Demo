@@ -5,16 +5,19 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux';
+import {authAction} from "../../store"
 toast.configure();
 
 function Login() {
-    const loginCtx = useSelector(state => state.auth.data)
-
     const [loading, setLoading] = useState(false)
     const [details, setdetails] = useState({
         email: "",
         password: ""
     })
+
+    const authCtx = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
     const handleSumbit = async (event) => {
         event.preventDefault()
         setLoading(true);
@@ -26,8 +29,7 @@ function Login() {
                     data
                 )
             if(response){
-                console.log(response)
-                localStorage.setItem('token', response.data.token);
+                dispatch(authAction.setData(response.data))
             }
             setdetails({
                 email: "",
