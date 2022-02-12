@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from 'react';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import './style.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { authAction } from "../../store";
+import axios from 'axios';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import './style.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 
 function Login() {
@@ -24,24 +24,25 @@ function Login() {
             const data = details;
             const response = await axios
                 .post(
-                    'http://nakshatra-demo.herokuapp.com/api/users/login',
+                    'https://nakshatra-demo.herokuapp.com/api/users/login',
                     data
                 )
             if (response) {
                 dispatch(authAction.updateData(response.data))
+                toast.success(`Welcome Back ${response.data.data.user.name}`, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             }
             setdetails({
                 email: "",
                 password: ""
             })
             setLoading(false)
-            toast.success("Login Success !", {
-                position: toast.POSITION.TOP_CENTER
-            });
+            window.location = "/profile";
         } catch (error) {
             console.log(error)
             setLoading(false)
-            toast.error(error.message, {
+            toast.error(error.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
