@@ -17,7 +17,7 @@ import {
   MDBNavbarBrand,
   MDBCollapse
 } from 'mdb-react-ui-kit';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { authAction } from "../../store";
 toast.configure();
@@ -29,25 +29,27 @@ const Header = () => {
   const [showNavColor, setShowNavColor] = useState(false);
   const authCtx = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const logOutHandler=async (event)=>{
     event.preventDefault();
         setLoading(true);
         try {
-              const token = localStorage.getItem('token');
-            const response = await axios
-                .get(
-                    'https://nakshatra-demo.herokuapp.com/api/users/logout',
-                    { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
-                );
+          const token = localStorage.getItem('token');
+          const response = await axios
+          .get(
+            'https://nakshatra-demo.herokuapp.com/api/users/logout',
+            { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
+            );
             if (response) {
-                dispatch(authAction.removeData());
-                toast.success(`Logout Success`, {
-                    position: toast.POSITION.TOP_RIGHT
-                });
+              localStorage.removeItem('token')
+              toast.success(`Logout Success`, {
+                position: toast.POSITION.TOP_RIGHT
+              });
+              history.push("/")
+              window.location.href = "/"
             }
             setLoading(false);
-            window.location = "/";
         } catch (error) {
             console.log(error);
             setLoading(false);
