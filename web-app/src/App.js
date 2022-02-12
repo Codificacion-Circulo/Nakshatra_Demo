@@ -1,12 +1,10 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import Routes from "./Routes";
 import alanBtn from "@alan-ai/alan-sdk-web";
-import Mapp from "./components/maps/Mapp"
 import {useHistory} from 'react-router-dom'
 
 function App() {
   const alanBtnContainer = useRef();
-  // const logoEl = useRef();
   const history = useHistory()
 
   useEffect(() => {
@@ -45,7 +43,6 @@ function App() {
       <div className="App">
         <div ref={alanBtnContainer}></div>
       </div>
-      {/* <Mapp /> */}
     </Fragment>
   );
 }
