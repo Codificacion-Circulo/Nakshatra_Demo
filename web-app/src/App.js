@@ -17,6 +17,19 @@ function App() {
         if (commandData.command === "showLoginPage") {
           history.push("/login")
         }
+        if (commandData.command === "showSignupPage") {
+          history.push("/signup")
+        }
+        if (commandData.command === "showUploadPage") {
+          history.push("/upload")
+        }
+        if (commandData.command === "showProfilePage") {
+          if(localStorage.getItem("token")){
+          history.push("/profile")
+          }else {
+            history.push("/login")
+          }
+        }
       },
     });
   }, []);
