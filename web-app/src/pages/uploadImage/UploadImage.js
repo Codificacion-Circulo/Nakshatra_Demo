@@ -19,8 +19,7 @@ const baseStyle = {
   color: "#bdbdbd",
   transition: "border .3s ease-in-out",
   padding: "3rem",
-  marginBottom: "2rem",
-  background: "#f9fafd",
+  marginBottom: "2rem"
 };
 
 const activeStyle = {
@@ -145,23 +144,39 @@ const UploadImage = (props) => {
           {...getRootProps({ style })}
         >
           <input {...getInputProps()} className="uploadInput" />
-          <img src={fileUpload} alt="file upload logo" />
-          <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
-            Drag and Drop your files here
-          </p>
+          {files && files.length === 0 ? (
+            <>
+              <img src={fileUpload} alt="file upload logo" className="px-5"/>
+              <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
+                Drag and Drop your files here
+              </p>
+            </>
+          ) : (
+            <>
+            <img src="https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8eCUyMHJheXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="file upload logo" />
+            <p className="text-success mt-3">File Uploaded Successfully</p>
+            </>
+          )}
         </div>
-        {files.length > 0 && (
+        {/* {files.length > 0 && (
           <p className="text-success">File Uploaded Successfully</p>
-        )}
+        )} */}
         <button className="uploadImage__uploadBtn" onClick={handleUploadImage}>
           Check Image
         </button>
       </div>
       {result && (
-          <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
-            <p className="text-center fw-bolder">Your result is: {result}</p>
-            <button className="uploadImage__uploadBtn" onClick={() => {setModal(true)}}>Know More</button>
-          </div>
+        <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
+          <p className="text-center fw-bolder">Your result is: {result}</p>
+          <button
+            className="uploadImage__uploadBtn"
+            onClick={() => {
+              setModal(true);
+            }}
+          >
+            Know More
+          </button>
+        </div>
       )}
       {modal && <ResultDescCard onClose={modalChangeHandler} />}
     </div>
