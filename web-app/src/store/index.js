@@ -31,5 +31,5 @@ const authSlice = createSlice({
 export const authAction = authSlice.actions
 export default configureStore({
     reducer: authSlice.reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false})
 })
