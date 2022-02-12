@@ -21,7 +21,12 @@ function App() {
           history.push("/signup")
         }
         if (commandData.command === "showUploadPage") {
-          history.push("/upload")
+          if(localStorage.getItem("token")){
+          history.push("/login")
+          }
+          else {
+            history.push("/upload")
+          }
         }
         if (commandData.command === "showProfilePage") {
           if(localStorage.getItem("token")){
