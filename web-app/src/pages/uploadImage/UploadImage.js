@@ -92,7 +92,7 @@ const UploadImage = (props) => {
         setLoading(true)
         const img = new Image();
         img.src = reader.result;
-        img.onload = () => {
+        img.onload = async () => {
           const tensor = tf.browser
           .fromPixels(img)
           .resizeBilinear([224, 224])
@@ -102,29 +102,32 @@ const UploadImage = (props) => {
           const xPredictions=modelX.predict(normalized)
           // const values = Array.from(xPredictions.dataSync());
           var xIndex = tf.argMax(xPredictions, 1).dataSync();
+          console.log(xIndex[0])
           if(xIndex[0]===1){
             const predictions = model.predict(normalized);
           var pIndex = tf.argMax(predictions, 1).dataSync();
           result=pIndex;
+          const token = localStorage.getItem('token');
+          if(token){
+            const added = await client.add({path:file.name,content:file},{
+              wrapWithDirectory: true,
+            })
+            const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
+            const response = await axios.post("https://nakshatra-demo.herokuapp.com/api/reports",
+            {image:url,result:classNames[result]},
+            { headers: { "Authorization": `Bearer ${token}` }});
+            setLoading(false)
+          }
+          setResult(classNames[result]);
           }else{
             toast.error("Please Upload an XRAY", {
               position: toast.POSITION.TOP_RIGHT,
             });
+            setLoading(false);
+            setResult(false)
           }
         };
       };
-      const token = localStorage.getItem('token');
-      if(token){
-        const added = await client.add({path:file.name,content:file},{
-          wrapWithDirectory: true,
-        })
-        const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
-        const response = await axios.post("https://nakshatra-demo.herokuapp.com/api/reports",
-        {image:url,result:classNames[result]},
-        { headers: { "Authorization": `Bearer ${token}` }});
-        setLoading(false)
-      }
-      setResult(classNames[result]);
       setLoading(false);
       setFiles([]);
     } catch (error) {

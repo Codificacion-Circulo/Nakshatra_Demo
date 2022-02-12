@@ -113,22 +113,22 @@ const KnowMore = () => {
           </div>
           <ul>
             {result === "covid" && covid.map((element, index) => (
-              <>
+              <div key={index}>
                 <li>{element.heading}</li>
                 <p>{element.subHeading}</p>
-              </>
+              </div>
             ))}
             {result === "tuberculosis" && tuberculosis.map((element, index) => (
-              <>
+              <div key={index}>
                 <li>{element.heading}</li>
                 <p>{element.subHeading}</p>
-              </>
+              </div>
             ))}
             {result === "pneumonia" && pneumonia.map((element, index) => (
-              <>
+              <div key={index}>
                 <li>{element.heading}</li>
                 <p>{element.subHeading}</p>
-              </>
+              </div>
             ))}
           </ul>
         </div>
