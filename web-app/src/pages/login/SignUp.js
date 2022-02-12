@@ -55,7 +55,7 @@ function SignUp() {
         } catch (error) {
             console.log(error)
             setLoading(false)
-            toast.error(error.message, {
+            toast.error(error.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
         }

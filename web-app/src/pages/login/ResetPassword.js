@@ -34,19 +34,20 @@ function ResetPassword() {
             const response = await axios.patch(`https://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`, data);
             if (response) {
                 dispatch(authAction.updateData(response.data))
+                toast.success("Password Reset !", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             }
             setdetails({
                 password: "",
                 passwordConfirm: ""
             })
             setLoading(false)
-            toast.success("Password Reset !", {
-                position: toast.POSITION.TOP_CENTER
-            });
+            window.location = "/profile";
         } catch (error) {
             console.log(error)
             setLoading(false)
-            toast.error(error.message, {
+            toast.error(error.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
