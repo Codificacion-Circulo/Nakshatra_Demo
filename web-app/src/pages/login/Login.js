@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import './style.css'
+import { useSelector, useDispatch } from 'react-redux';
 toast.configure();
 
 function Login() {
+    const loginCtx = useSelector(state => state.auth.data)
+
     const [loading, setLoading] = useState(false)
     const [details, setdetails] = useState({
         email: "",
