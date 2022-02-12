@@ -1,6 +1,87 @@
 import "./KnowMore.css";
+import {useParams} from "react-router-dom"
+
+const covid = [
+  {
+    heading: "Self Isolate",
+    subHeading:
+      "As soon as you have tested positive for the Coronavirus, you must self-isolate as soon as possible. Make the necessary adjustments and preparations to isolate yourself from all the household members for at least 14 days since the last possible exposure to the virus. Try to isolate yourself in a well ventilated room. Keep the doors closed at all times and wear a triple layer mask as much as possible. This mask must be changed every 8 hours and the used mask must be correctly disposed to avoid contamination of the surroundings. A single caretaker should regularly check up on you provided that they are wearing the appropriate PPE (Personal Protective Equipment) and an N 95 mask.",
+  },
+  {
+    heading: "Regular monitoring",
+    subHeading:
+      "It is absolutely crucial to monitor yourself and check on your recovery progress and statistics throughout the isolation period. Use an oximeter to frequently check your oxygen levels as well as a thermometer to check your temperature. It is good to maintain a record of all your results and any irregularities can help identify as to whether further assistance is required. Eat nutritious meals and stay hydrated. This aids in keeping your immune system as stable as possible and promotes a smoother recovery.",
+  },
+  {
+    heading: "Medications",
+    subHeading:
+      "It is advised to resort to supportive medicines such as cough syrups and paracetamol to help any mild symptoms of the virus. However, you must never listen to anyone besides a professional and take any other medications or antibiotics unless specifically prescribed by your doctor as this could aggravate the infection or cause unnecessary side effects which would retard the recovery process. Always consult a doctor or an expert before implementing any drastic medical changes to your recovery and self isolation routine.  ",
+  },
+  {
+    heading: "Seek medical attention",
+    subHeading:
+      "Medical attention is necessary regardless of the severity of the infection. In general infection scenarios, the right self isolation procedure and care is satisfactory for a seamless recovery without the need for hospitalisation. Stay in touch with a doctor through phone or video calls to help check for diagnosis and recovery progress reports. However, in the case where the infection is between moderate to severe, contact a doctor immediately. If you are having difficulty in breathing, persistent pain, a fever of 101 degrees celsius or above or are finding it difficult to wake up or stay awake, it is advised that you contact a professional caretaker. There are just a few of the symptoms caused by the new variant of the coronavirus.",
+  },
+  {
+    heading: "Stay calm",
+    subHeading:
+      "Stay relaxed and focused as soon as you test positive for COVID-19. The saying, “Worrying means you suffer twice.” is a very true statement as the problem most likely is not as bad as you would think about in your mind. Most of the scenarios and possibilities that you would overthink about may not even occur which means that you may have spent unnecessary time stressing about hypothetical situations which could adversely affect your recovery process. Maintaining a stable and calm state of mind is vital during the isolation and recovery phase.",
+  },
+];
+
+const tuberculosis = [
+  {
+    heading: "Seek medical attention",
+    subHeading: "Medical attention is necessary regardless of the severity of the infection. In general infection scenarios, the right self isolation procedure and care is satisfactory for a seamless recovery without the need for hospitalisation. Stay in touch with a doctor through phone or video calls to help check for diagnosis and recovery progress reports. However, in the case where the infection is between moderate to severe, contact a doctor immediately."
+  },
+  {
+    heading: "Manage fever and cough at home",
+    subHeading: "Drink plenty of fluids to help loosen secretions and bring up phlegm. Drink warm beverages, take steamy baths and use a humidifier to help open your airways and ease your breathing. Get lots of rest. You may need to stay in bed for a while. Get as much help as you can with meal preparation and household chores until you are feeling stronger. It is important not to overdo daily activities until you are fully recovered."
+  },
+  {
+    heading: "High risk groups",
+    subHeading: "people with weakened immune systems. people with alcoholism. people who are older. people living in institutions. people living in overcrowded conditions. people with diabetes",
+  },
+  {
+    heading: "Say no to smoke",
+    subHeading: "Stay away from smoke to let your lungs heal. This includes smoking, secondhand smoke and wood smoke."
+  },
+  {
+    heading: "Stopping the spread",
+    subHeading: "Always cover your mouth with a tissue when you cough or sneeze. Seal the tissue in a plastic bag, then throw it away. Wash your hands after coughing or sneezing. Don’t visit other people and don’t invite them to visit you. Stay home from work, school, or other public places. Don’t use public transportation."
+  },
+  {
+    heading: "Stay calm",
+    subHeading: "Stay relaxed and focused as soon as you affected by tuberculosis. The saying, “Worrying means you suffer twice.” is a very true statement as the problem most likely is not as bad as you would think about in your mind. Most of the scenarios and possibilities that you would overthink about may not even occur which means that you may have spent unnecessary time stressing about hypothetical situations which could adversely affect your recovery process. Maintaining a stable and calm state of mind is vital during the isolation and recovery phase. Use a fan or open windows to move around fresh air"
+  }
+]
+
+const pneumonia = [
+  {
+    heading: "Seek medical attention",
+    subHeading: "If you start feeling sick and your breathing get worse seek medical attention which is necessary regardless of the severity of the infection. In general infection scenarios, the right self isolation procedure and care is satisfactory for a seamless recovery without the need for hospitalisation. Stay in touch with a doctor through phone or video calls to help check for diagnosis and recovery progress reports. However, in the case where the infection is between moderate to severe, contact a doctor immediately."
+  },
+  {
+    heading: "Manage pneumonia at home",
+    subHeading: "Drink plenty of water. Eat balanced diet. Eat food with proper nutrition. Get plenty of rest. Aim to slowly work back into your usual routine and be sure to take notes of any sign that the infections may be coming back."
+  },
+  {
+    heading: "High risk groups",
+    subHeading: "infants from birth to 2 years old. people with age above 65. People with weakened immune systems due to pregnancy, HIV, and the use of certain medications such as steroids or certain cancer drugs. people with certain chronic medical conditions such as asthma, cystic fibrosis, diabetes, COPD, heart failure, sickel cell disease, liver disease, kidney disease. People who’ve had a brain disorder, which can affect the ability to swallow or cough",
+  },
+  {
+    heading: "Possible Complications",
+    subHeading: "Worsened chronic conditions. If you have certain preexisting health conditions, pneumonia could make them worse. These conditions include congestive heart failure and emphysema. Bacteremia. Bacteria from the pneumonia infection may spread to your bloodstream. This can lead to dangerously low blood pressure, septic shock, and, in some cases, organ failure. Impaired breathing. You may have trouble getting enough oxygen when you breathe. You may need to use a ventilator. Acute respiratory distress syndrome. This is a severe form of respiratory failure. It’s a medical emergency. Kidney, heart, and liver damage. These organs may be damaged if they don’t receive enough oxygen, or if there’s an overreaction of the immune system to the infection.",
+  },
+  {
+    heading: "Stay calm",
+    subHeading: "Stay relaxed and focused as soon as you affected by tuberculosis. The saying, “Worrying means you suffer twice.” is a very true statement as the problem most likely is not as bad as you would think about in your mind. Most of the scenarios and possibilities that you would overthink about may not even occur which means that you may have spent unnecessary time stressing about hypothetical situations which could adversely affect your recovery process. Maintaining a stable and calm state of mind is vital during the isolation and recovery phase. Use a fan or open windows to move around fresh air"
+  }
+]
 
 const KnowMore = () => {
+  const {result} = useParams()
+  console.log(result);
   return (
     <div className="knowMore__container container d-flex flex-column align-items-center">
       <div className="knowMore__sectionHeading">
@@ -29,107 +110,27 @@ const KnowMore = () => {
         </div> */}
         <div className="knowMore__otherInfoDiv d-flex flex-column align-items-center">
           <div className="knowMore__otherInfoHeading">
-            <p>Upcoming Steps</p>
+            <p>Measures to Take</p>
           </div>
           <ul>
-            <li>Terms</li>
-            <p>
-              By accessing this web site, you are agreeing to be bound by these
-              web site Terms and Conditions of Use, all applicable laws and
-              regulations, and agree that you are responsible for compliance
-              with any applicable local laws. If you do not agree with any of
-              these terms, you are prohibited from using or accessing this site.
-              The materials contained in this web site are protected by
-              applicable copyright and trade mark law.
-            </p>
-
-            <li>Use License</li>
-            <p>
-              Permission is granted to temporarily download one copy of the
-              materials (information or software) on DevDeg's web site for
-              personal, non-commercial transitory viewing only. This is the
-              grant of a license, not a transfer of title, and under this
-              license you may not: modify or copy the materials;
-              <br />
-              use the materials for any commercial purpose, or for any public
-              display (commercial or non-commercial); attempt to decompile or
-              reverse engineer any software contained on DevDeg's web site;
-              remove any copyright or other proprietary notations from the
-              materials; or transfer the materials to another person or "mirror"
-              the materials on any other server.
-              <br />
-              This license shall automatically terminate if you violate any of
-              these restrictions and may be terminated by DevDeg at any time.
-              Upon terminating your viewing of these materials or upon the
-              termination of this license, you must destroy any downloaded
-              materials in your possession whether in electronic or printed
-              format.
-            </p>
-            <li>Disclaimer</li>
-            <p>
-              The materials on DevDeg's web site are provided "as is". DevDeg
-              makes no warranties, expressed or implied, and hereby disclaims
-              and negates all other warranties, including without limitation,
-              implied warranties or conditions of merchantability, fitness for a
-              particular purpose, or non-infringement of intellectual property
-              or other violation of rights. Further, DevDeg does not warrant or
-              make any representations concerning the accuracy, likely results,
-              or reliability of the use of the materials on its Internet web
-              site or otherwise relating to such materials or on any sites
-              linked to this site.
-            </p>
-
-            <li>Limitations</li>
-            <p>
-              In no event shall DevDeg or its suppliers be liable for any
-              damages (including, without limitation, damages for loss of data
-              or profit, or due to business interruption,) arising out of the
-              use or inability to use the materials on DevDeg's Internet site,
-              even if DevDeg or a DevDeg authorized representative has been
-              notified orally or in writing of the possibility of such damage.
-              Because some jurisdictions do not allow limitations on implied
-              warranties, or limitations of liability for consequential or
-              incidental damages, these limitations may not apply to you.
-            </p>
-
-            <li>Revisions and Errata</li>
-            <p>
-              The materials appearing on DevDeg's web site could include
-              technical, typographical, or photographic errors. DevDeg does not
-              warrant that any of the materials on its web site are accurate,
-              complete, or current.
-              <br />
-              DevDeg may make changes to the materials contained on its web site
-              at any time without notice. DevDeg does not, however, make any
-              commitment to update the materials.
-            </p>
-
-            <li>Links</li>
-            <p>
-              DevDeg has not reviewed all of the sites linked to its Internet
-              web site and is not responsible for the contents of any such
-              linked site.The inclusion of any link does not imply endorsement
-              by DevDeg of the site. Use of any such linked web site is at the
-              user's own risk.
-            </p>
-
-            <li>Site Terms of Use Modifications</li>
-            <p>
-              DevDeg may revise these terms of use for its web site at any time
-              without notice. By using this web site you are agreeing to be
-              bound by the then current version of these Terms and Conditions of
-              Use.
-            </p>
-            <br />
-
-            <li>Governing Law</li>
-            <p>
-              Any claim relating to DevDeg's web site shall be governed by the
-              laws of Poland without regard to its conflict of law provisions.
-            </p>
-            <li>
-              General Terms and Conditions applicable to Use of a Web Site.
-            </li>
+            {result === "covid" && covid.map((element, index) => (
+              <>
+                <li>{element.heading}</li>
+                <p>{element.subHeading}</p>
+              </>
+            ))}
+            {result === "tuberculosis" && tuberculosis.map((element, index) => (
+              <>
+                <li>{element.heading}</li>
+                <p>{element.subHeading}</p>
+              </>
+            ))}
+            {result === "pneumonia" && pneumonia.map((element, index) => (
+              <>
+                <li>{element.heading}</li>
+                <p>{element.subHeading}</p>
+              </>
+            ))}
           </ul>
         </div>
       </div>
