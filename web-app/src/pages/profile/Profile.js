@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { authAction } from "../../store";
 import { create } from 'ipfs-http-client';
+import { useHistory } from 'react-router-dom';
 const client = create('https://ipfs.infura.io:5001/api/v0')
 toast.configure();
 const Profile = () => {
@@ -21,6 +22,8 @@ const Profile = () => {
     email: "",
     photo: ""
   })
+  const history = useHistory()
+
   const captureFile = async (e) => {
     setLoading(true)
     let file = e.target.files[0];
@@ -43,13 +46,14 @@ const Profile = () => {
           'https://nakshatra-demo.herokuapp.com/api/users/deleteMe', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
         )
       if (response) {
-        dispatch(authAction.removeData())
+        localStorage.removeItem('token')
         toast.success("User Account Deleted", {
           position: toast.POSITION.TOP_RIGHT
         });
+        history.push("/")
+        window.location.href = "/"
       }
       setLoading(false)
-      window.location = "/";
     } catch (error) {
       console.log(error)
       setLoading(false)

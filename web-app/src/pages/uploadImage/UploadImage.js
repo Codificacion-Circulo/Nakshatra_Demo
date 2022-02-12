@@ -99,9 +99,10 @@ const UploadImage = (props) => {
         const response = await axios.post("https://nakshatra-demo.herokuapp.com/api/reports",
         {image:url,result:classNames[result]},
         { headers: { "Authorization": `Bearer ${token}` }});
+        console.log(response)
       }
       setResult(classNames[result]);
-      setLoading(false);
+      setLoading(false)
       setFiles([]);
     } catch (error) {
       console.log(error);
