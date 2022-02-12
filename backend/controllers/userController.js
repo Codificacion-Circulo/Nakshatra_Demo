@@ -1,6 +1,7 @@
 // const multer = require('multer');
 // const sharp = require('sharp');
 const User = require('./../models/userModel');
+const Report =require('./../models/reportModel')
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
@@ -87,7 +88,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+  await User.findByIdAndDelete(req.user.id);
+  await Report.deleteMany({user:req.user.id});
 
   res.status(204).json({
     status: 'success',
