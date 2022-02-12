@@ -37,9 +37,8 @@ function SignUp() {
                     'http://nakshatra-demo.herokuapp.com/api/users/signup',
                     data
                 )
-            console.log(response)
-            if(response){
-                dispatch(authAction.setData(response.data))
+            if (response) {
+                dispatch(authAction.updateData(response.data))
             }
             setdetails({
                 name: "",

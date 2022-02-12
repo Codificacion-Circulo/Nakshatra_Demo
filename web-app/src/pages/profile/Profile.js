@@ -6,27 +6,56 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import HistoryCard from '../../components/HistoryCard/HistoryCard';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { authAction } from "../../store";
 toast.configure();
 const Profile = () => {
   const [loading, setLoading] = useState(false)
   const [details, setDetails] = useState({})
+  const authCtx = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token');
   const [user, setUser] = useState({
     name: "",
     email: "",
-    photo:""
+    photo: ""
   })
+  const handleDelete = async () => {
 
+  }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setLoading(true);
+    try {
+      const data = user;
+      const response = await axios
+        .patch(
+          'http://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
+        )
+      if (response) {
+        dispatch(authAction.setData(response))
+        console.log(response.data)
+      }
+      setLoading(false)
+      toast.success("Details Updated!", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+  }
   useEffect(() => {
     const getTodo = () => {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      const reqOne = axios.get('http://nakshatra-demo.herokuapp.com/api/users/me', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
-      const reqTwo = axios.get('http://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
-      axios.all([reqOne, reqTwo]).then(axios.spread((...responses) => {
-        setDetails(responses[1].data)
-        setUser(responses[0].data.data.data)
-        setLoading(false)
-      }))
+      axios.get('http://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+        .then((response) => {
+          setDetails(response.data)
+          setLoading(false)
+        })
         .catch((e) => {
           console.log('something went wrong :(', e);
           toast.error(e.message, {
@@ -37,6 +66,13 @@ const Profile = () => {
     };
     getTodo();
   }, []);
+  useEffect(() => {
+    setUser({
+      name: authCtx.name,
+      email: authCtx.email,
+      photo: authCtx.photo
+    })
+  }, [authCtx.name, authCtx.email, authCtx.photo])
   return (
     <>
       {loading && <LoadingSpinner />}
@@ -55,10 +91,10 @@ const Profile = () => {
                 accept="image/*"
               />
               <label htmlFor="profileImage" className="profile__imgLabel">
-              {user && user.photo ? (
+                {user && user.photo ? (
                   <div
                     className="select-asset-image"
-                    style={{ backgroundImage: `url(${user&&user.photo})` }}
+                    style={{ backgroundImage: `url(${user && user.photo})` }}
                   ></div>
                 ) : (
                   <i className="fas fa-image"></i>
@@ -72,7 +108,7 @@ const Profile = () => {
                   type="text"
                   className="form-control"
                   id="username"
-                  onChange={(e)=>setUser({...user,name:e.target.value})}
+                  onChange={(e) => setUser({ ...user, name: e.target.value })}
                   value={user && user.name}
                 />
               </div>
@@ -84,16 +120,16 @@ const Profile = () => {
                   type="email"
                   className="form-control"
                   id="email"
-                  onChange={(e)=>setUser({...user,email:e.target.value})}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
                   value={user && user.email}
                   aria-describedby="emailHelp"
                 />
               </div>
               <div className="profile__submitBtn d-inline">
-                <button type="submit" className="m-1 fw-bolder">Submit</button>
+                <button type="submit" onClick={handleSubmit} className="m-1 fw-bolder">Submit</button>
               </div>
               <div className="profile__submitBtnd d-inline">
-                <button type="button" className="m-1 fw-bolder">Delete Account</button>
+                <button type="button" onClick={handleDelete} className="m-1 fw-bolder">Delete Account</button>
               </div>
 
             </div>

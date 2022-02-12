@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import './style.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { authAction } from "../../store"
 toast.configure();
 
 function ResetPassword() {
@@ -14,6 +16,9 @@ function ResetPassword() {
         password: "",
         passwordConfirm: ""
     })
+    const authCtx = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
     const handleSumbit = async (event) => {
         event.preventDefault()
         setLoading(true);
@@ -24,15 +29,12 @@ function ResetPassword() {
                 toast.warn("Password Do Not Match !", {
                     position: toast.POSITION.TOP_RIGHT
                 });
-
                 return
             }
-            const response = await axios
-                .post(
-                    `http://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`,
-                    data
-                )
-            console.log(response)
+            const response = await axios.patch(`http://nakshatra-demo.herokuapp.com/api/users/resetPassword/${params && params.id && params.id}`, data);
+            if (response) {
+                dispatch(authAction.updateData(response.data))
+            }
             setdetails({
                 password: "",
                 passwordConfirm: ""
@@ -66,12 +68,6 @@ function ResetPassword() {
                         <input type="password" className="form-control" placeholder="Enter password" value={details.passwordConfirm} onChange={(e) => setdetails({ ...details, passwordConfirm: e.target.value })} required />
                     </div>
 
-                    {/* <div className="form-group">
-    <div className="custom-control custom-checkbox">
-        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-    </div>
-</div> */}
 
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Reset Password</button>
                     <p className="forgot-password text-right">
