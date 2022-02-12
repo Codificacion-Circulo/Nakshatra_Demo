@@ -44,6 +44,7 @@ const UploadImage = (props) => {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
+  
   const loadModel = async (url) => {
     try {
       // For layered model
@@ -54,13 +55,13 @@ const UploadImage = (props) => {
       console.log(err);
     }
   };
-
+  
   useEffect(() => {
     tf.ready().then(() => {
       loadModel(url);
     });
   }, []);
-
+  
   const handleUploadImage = () => {
     try {
       const file = files[0];
@@ -75,9 +76,9 @@ const UploadImage = (props) => {
         img.src = reader.result;
         img.onload = () => {
           const tensor = tf.browser
-            .fromPixels(img)
-            .resizeBilinear([224, 224])
-            .toFloat();
+          .fromPixels(img)
+          .resizeBilinear([224, 224])
+          .toFloat();
           const offset = tf.scalar(255.0);
           const normalized = tensor.div(offset).expandDims(0);
           const predictions = model.predict(normalized);
@@ -186,7 +187,7 @@ const UploadImage = (props) => {
               Your Chest X-Ray is classfied as {result}
             </p>
             <Link
-              to="/knowmore"
+              to={`/knowmore/${result && result}`}
               className="uploadImage__uploadBtn"
               style={{ textDecoration: "none" }}
             >
