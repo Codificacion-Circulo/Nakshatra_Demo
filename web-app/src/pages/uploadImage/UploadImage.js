@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// assest imports
 import fileUpload from "../../assets/fileUpload.png";
-
+import axios from "axios";
+import { create } from 'ipfs-http-client';
+const client = create('https://ipfs.infura.io:5001/api/v0')
 toast.configure();
 
 const url = {
@@ -62,14 +63,16 @@ const UploadImage = (props) => {
     });
   }, []);
   
-  const handleUploadImage = () => {
+  const handleUploadImage =async () => {
     try {
       const file = files[0];
-      console.log(file);
+      console.log(file)
+      const classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
+      var result= 0;
       const reader = new FileReader();
       reader.readAsDataURL(file);
       console.log("before");
-      reader.onload = () => {
+      reader.onload = async() => {
         console.log("after");
         setLoading(true)
         const img = new Image();
@@ -84,12 +87,22 @@ const UploadImage = (props) => {
           const predictions = model.predict(normalized);
           // const values = Array.from(predictions.dataSync());
           var pIndex = tf.argMax(predictions, 1).dataSync();
-          var classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
           // alert(classNames[pIndex]);
-          setResult(classNames[pIndex]);
-          setLoading(false);
+          result=pIndex;
         };
       };
+      const token = localStorage.getItem('token');
+      if(token){
+        const added = await client.add({path:file.name,content:file},{
+          wrapWithDirectory: true,
+        })
+        const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
+        const response = await axios.post("https://nakshatra-demo.herokuapp.com/api/reports",
+        {image:url,result:classNames[result]},
+        { headers: { "Authorization": `Bearer ${token}` }});
+      }
+      setResult(classNames[result]);
+      setLoading(false);
       setFiles([]);
     } catch (error) {
       console.log(error);
