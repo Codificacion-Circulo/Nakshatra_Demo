@@ -63,6 +63,12 @@
 .profile__imgLabel {
   background-size: cover;
 }
+.profile__imgLabel img{
+  background-size: cover;
+  border-radius: 10px;
+  max-width: 10.5rem;
+  height: 9.5rem;
+}
 
 .profile__inputContainer {
   padding: 0.5rem 2rem; 

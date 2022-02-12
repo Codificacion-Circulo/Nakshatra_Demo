@@ -14,7 +14,8 @@ const client = create('https://ipfs.infura.io:5001/api/v0')
 toast.configure();
 const Profile = () => {
   const [loading, setLoading] = useState(false)
-  const [details, setDetails] = useState({})
+  const [details, setDetails] = useState({});
+  const [files, setFiles] = useState([]);
   const authCtx = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [user, setUser] = useState({
@@ -26,16 +27,9 @@ const Profile = () => {
 
   const captureFile = async (e) => {
     setLoading(true)
-    let file = e.target.files[0];
-    const token = localStorage.getItem('token');
-      if(token){
-        const added = await client.add({path:file.name,content:file},{
-          wrapWithDirectory: true,
-        })
-        const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
-        setUser((prevState)=>{ return {...prevState, photo: url }});
+    setFiles(e.target.files);
     setLoading(false)
-   } };
+   };
   const handleDelete = async (event) => {
     event.preventDefault()
     setLoading(true);
@@ -66,11 +60,16 @@ const Profile = () => {
     event.preventDefault()
     setLoading(true);
     try {
+    const data=user;
       const token = localStorage.getItem('token');
-      const data = user;
+        if(files[0]){
+          const added = await client.add({path:files[0].name,content:files[0]},{wrapWithDirectory: true});
+        const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${files[0].name}`
+        data['photo']=url;
+        };
       const response = await axios
         .patch(
-          'https://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
+          'https://nakshatra-demo.herokuapp.com/api/users/updateMe',data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
         )
       if (response) {
         dispatch(authAction.setData(response))
@@ -78,7 +77,9 @@ const Profile = () => {
       toast.success("Details Updated!", {
         position: toast.POSITION.TOP_RIGHT
       });
+      setFiles([])
       setLoading(false)
+      window.location.reload();
     } catch (error) {
       console.log(error)
       setLoading(false)
@@ -105,6 +106,8 @@ const Profile = () => {
           setLoading(false)
         });
       }
+      setLoading(false)
+
     };
     getTodo();
   }, [authCtx]);
@@ -133,7 +136,9 @@ const Profile = () => {
                 accept="image/*"
                 onChange={captureFile}
               />
-              <label htmlFor="profileImage" className="profile__imgLabel"  style={{ backgroundImage: `url(${authCtx && authCtx.photo})`}}></label>
+              <label htmlFor="profileImage" className="profile__imgLabel"  >
+                {files&&files.length===0?(<img src={user&&user.photo}/>):(<img src={URL.createObjectURL(files[0])}/>)}
+              </label>
             </div>
             <div className="profile__inputContainer col-6">
               <div className="profile__inputDiv mb-3">
