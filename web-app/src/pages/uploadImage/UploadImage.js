@@ -88,6 +88,7 @@ const UploadImage = (props) => {
           var pIndex = tf.argMax(predictions, 1).dataSync();
           // alert(classNames[pIndex]);
           result=pIndex;
+          setLoading(false)
         };
       };
       const token = localStorage.getItem('token');
@@ -101,7 +102,6 @@ const UploadImage = (props) => {
         { headers: { "Authorization": `Bearer ${token}` }});
       }
       setResult(classNames[result]);
-      setLoading(false);
       setFiles([]);
     } catch (error) {
       console.log(error);
