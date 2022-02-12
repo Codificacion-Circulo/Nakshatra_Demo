@@ -76,10 +76,10 @@ const Profile = () => {
       if (response) {
         dispatch(authAction.setData(response))
       }
-      setLoading(false)
       toast.success("Details Updated!", {
         position: toast.POSITION.TOP_RIGHT
       });
+      setLoading(false)
     } catch (error) {
       console.log(error)
       setLoading(false)
@@ -92,7 +92,8 @@ const Profile = () => {
     const getTodo = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
-      axios.get('https://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+      if(authCtx._id){
+        axios.get(`https://nakshatra-demo.herokuapp.com/api/users/${authCtx&&authCtx._id}/reports`, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
         .then((response) => {
           setDetails(response.data)
           setLoading(false)
@@ -104,9 +105,10 @@ const Profile = () => {
           });
           setLoading(false)
         });
+      }
     };
     getTodo();
-  }, []);
+  }, [authCtx]);
   useEffect(() => {
       setUser({
         name: authCtx.name,
