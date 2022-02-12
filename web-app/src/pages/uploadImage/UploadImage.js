@@ -148,7 +148,7 @@ const UploadImage = (props) => {
             <>
               <img src={fileUpload} alt="file upload logo" className="px-5"/>
               <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
-                Drag and Drop your files here
+                Drag and Drop your Chest X-Ray here
               </p>
             </>
           ) : (
@@ -167,7 +167,7 @@ const UploadImage = (props) => {
       </div>
       {result && (
         <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
-          <p className="text-center fw-bolder">Your result is: {result}</p>
+          <p className="text-center fw-bolder">Your Chest X-Ray is classfied as {result}</p>
           <button
             className="uploadImage__uploadBtn"
             onClick={() => {

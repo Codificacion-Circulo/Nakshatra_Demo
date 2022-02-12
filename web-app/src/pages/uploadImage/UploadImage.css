@@ -63,3 +63,21 @@
 .uploadImage__resultDiv p {
     font-size: 1.5rem;
 }
+
+@media screen and (max-width: 1000px) {
+    .uploadImage__dndContainer {
+        width: 60%;
+    }
+    .uploadImage__resultDiv {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .uploadImage__dndContainer {
+        width: 100%;
+    }
+    .uploadImage__resultDiv {
+        width: 100%;
+    }
+}
