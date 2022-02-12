@@ -63,6 +63,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const data = user;
+      console.log(data)
       const response = await axios
         .patch(
           'https://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
@@ -125,7 +126,7 @@ const Profile = () => {
                 accept="image/*"
                 onChange={captureFile}
               />
-              <label htmlFor="profileImage" className="profile__imgLabel"  style={{ backgroundImage: `url(${user && user.photo})`}}></label>
+              <label htmlFor="profileImage" className="profile__imgLabel"  style={{ backgroundImage: `url(${authCtx && authCtx.photo})`}}></label>
             </div>
             <div className="profile__inputContainer col-6">
               <div className="profile__inputDiv mb-3">
