@@ -18,23 +18,22 @@ function ForgotPassword() {
             const data = details;
             const response = await axios
                 .post(
-                    'http://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
+                    'https://nakshatra-demo.herokuapp.com/api/users/forgotPassword',
                     data
                 )
-            console.log(response)
             setdetails({
                 email: ""
             })
             if (response) {
                 toast.success(response.data.message, {
-                    position: toast.POSITION.TOP_CENTER
+                    position: toast.POSITION.TOP_RIGHT
                 });
             }
             setLoading(false)
         } catch (error) {
             console.log(error)
             setLoading(false)
-            toast.error(error.message, {
+            toast.error(error.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
         }

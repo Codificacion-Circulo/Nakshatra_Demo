@@ -20,8 +20,28 @@ const Profile = () => {
     email: "",
     photo: ""
   })
-  const handleDelete = async () => {
-
+  const handleDelete = async (event) => {
+    event.preventDefault()
+    setLoading(true);
+    try {
+      const response = await axios
+        .delete(
+          'https://nakshatra-demo.herokuapp.com/api/users/deleteMe', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
+        )
+      if (response) {
+        dispatch(authAction.removeData())
+      }
+      setLoading(false)
+      toast.success("User Account Deleted", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+      toast.error(error.response.data.message, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -30,20 +50,19 @@ const Profile = () => {
       const data = user;
       const response = await axios
         .patch(
-          'http://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
+          'https://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
         )
       if (response) {
         dispatch(authAction.setData(response))
-        console.log(response.data)
       }
       setLoading(false)
       toast.success("Details Updated!", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_RIGHT
       });
     } catch (error) {
       console.log(error)
       setLoading(false)
-      toast.error(error.message, {
+      toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_RIGHT
       });
     }
@@ -51,7 +70,7 @@ const Profile = () => {
   useEffect(() => {
     const getTodo = () => {
       setLoading(true);
-      axios.get('http://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
+      axios.get('https://nakshatra-demo.herokuapp.com/api/reports', { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true })
         .then((response) => {
           setDetails(response.data)
           setLoading(false)
