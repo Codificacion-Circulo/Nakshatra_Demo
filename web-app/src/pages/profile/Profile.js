@@ -31,7 +31,7 @@ const Profile = () => {
           wrapWithDirectory: true,
         })
         const url = `https://ipfs.infura.io/ipfs/${added.cid.toString()}/${file.name}`
-        setUser({...user,photo:url});
+        setUser((prevState)=>{ return {...prevState, photo: url }});
     setLoading(false)
    } };
   const handleDelete = async (event) => {
@@ -101,14 +101,12 @@ const Profile = () => {
     getTodo();
   }, []);
   useEffect(() => {
-    if((authCtx.name!=="")&&(authCtx.email!=="")&&(authCtx.photo!=="")){
       setUser({
         name: authCtx.name,
         email: authCtx.email,
         photo: authCtx.photo
       })
-    }
-  }, [authCtx.name, authCtx.email, authCtx.photo])
+  }, [authCtx])
   return (
     <>
       {loading && <LoadingSpinner />}
@@ -148,7 +146,7 @@ const Profile = () => {
                   type="email"
                   className="form-control"
                   id="email"
-                  value={authCtx && authCtx.email}
+                  value={user && user.email}
                   disabled={true}
                   aria-describedby="emailHelp"
                 />
