@@ -76,10 +76,10 @@ const Profile = () => {
       if (response) {
         dispatch(authAction.setData(response))
       }
-      setLoading(false)
       toast.success("Details Updated!", {
         position: toast.POSITION.TOP_RIGHT
       });
+      setLoading(false)
     } catch (error) {
       console.log(error)
       setLoading(false)
