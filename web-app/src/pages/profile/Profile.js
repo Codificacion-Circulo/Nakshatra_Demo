@@ -68,7 +68,6 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const data = user;
-      console.log(data)
       const response = await axios
         .patch(
           'https://nakshatra-demo.herokuapp.com/api/users/updateMe', data, { headers: { "Authorization": `Bearer ${token}` }, withCredentials: true }
@@ -99,7 +98,7 @@ const Profile = () => {
           setLoading(false)
         })
         .catch((e) => {
-          console.log('something went wrong :(', e);
+          console.log(e);
           toast.error(e.response.data.message, {
             position: toast.POSITION.TOP_RIGHT
           });

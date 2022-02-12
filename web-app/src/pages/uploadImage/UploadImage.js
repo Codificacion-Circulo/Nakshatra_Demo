@@ -13,7 +13,11 @@ const client = create('https://ipfs.infura.io:5001/api/v0')
 toast.configure();
 
 const url = {
-  model: "model.json",
+  model: "TFJS/model.json",
+};
+
+const urlX = {
+  modelX: "XRAY/model.json",
 };
 
 const baseStyle = {
@@ -41,6 +45,7 @@ const rejectStyle = {
 
 const UploadImage = (props) => {
   const [model, setModel] = useState();
+  const [modelX, setModelX] = useState();
   const [files, setFiles] = useState([]);
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
@@ -57,9 +62,22 @@ const UploadImage = (props) => {
     }
   };
   
+  const loadModelX = async (urlX) => {
+    try {
+      // For layered model
+      const modelX = await tf.loadLayersModel(urlX.modelX);
+      setModelX(modelX);
+      console.log("Load model success");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   useEffect(() => {
     tf.ready().then(() => {
       loadModel(url);
+      loadModelX(urlX)
     });
   }, []);
   
@@ -70,9 +88,7 @@ const UploadImage = (props) => {
       var result= 0;
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      console.log("before");
       reader.onload = async() => {
-        console.log("after");
         setLoading(true)
         const img = new Image();
         img.src = reader.result;
@@ -83,11 +99,18 @@ const UploadImage = (props) => {
           .toFloat();
           const offset = tf.scalar(255.0);
           const normalized = tensor.div(offset).expandDims(0);
-          const predictions = model.predict(normalized);
-          // const values = Array.from(predictions.dataSync());
+          const xPredictions=modelX.predict(normalized)
+          // const values = Array.from(xPredictions.dataSync());
+          var xIndex = tf.argMax(xPredictions, 1).dataSync();
+          if(xIndex[0]===1){
+            const predictions = model.predict(normalized);
           var pIndex = tf.argMax(predictions, 1).dataSync();
-          // alert(classNames[pIndex]);
           result=pIndex;
+          }else{
+            toast.error("Please Upload an XRAY", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          }
         };
       };
       const token = localStorage.getItem('token');
@@ -99,10 +122,10 @@ const UploadImage = (props) => {
         const response = await axios.post("https://nakshatra-demo.herokuapp.com/api/reports",
         {image:url,result:classNames[result]},
         { headers: { "Authorization": `Bearer ${token}` }});
-        console.log(response)
+        setLoading(false)
       }
       setResult(classNames[result]);
-      setLoading(false)
+      setLoading(false);
       setFiles([]);
     } catch (error) {
       console.log(error);

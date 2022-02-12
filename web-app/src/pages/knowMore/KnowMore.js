@@ -81,11 +81,10 @@ const pneumonia = [
 
 const KnowMore = () => {
   const {result} = useParams()
-  console.log(result);
   return (
     <div className="knowMore__container container d-flex flex-column align-items-center">
       <div className="knowMore__sectionHeading">
-        <p>W.H.O recommendation for Covid</p>
+        <p>W.H.O recommendation for {result&&result}</p>
       </div>
       <div className="knowMore__containerDiv">
         {/* <div className="knowMore__profileInfoContainer">

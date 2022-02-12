@@ -21,7 +21,6 @@ const authSlice = createSlice({
             localStorage.removeItem('token')
         },
         updateData: (state, action) => {
-            console.log(action.payload)
             state.user = action.payload.user
             localStorage.removeItem('token')
             localStorage.setItem('token', action.payload.token)
