@@ -206,7 +206,7 @@ const UploadImage = (props) => {
             ) : (
               <>
                 <img
-                  src="https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8eCUyMHJheXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                  src={URL.createObjectURL(files[0])}
                   alt="file upload logo"
                 />
                 <p className="text-success mt-3">File Uploaded Successfully</p>
