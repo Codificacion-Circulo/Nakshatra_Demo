@@ -5,7 +5,6 @@ import "./Header.css";
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import fileDownload from 'js-file-download';
 import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBNavbar,
