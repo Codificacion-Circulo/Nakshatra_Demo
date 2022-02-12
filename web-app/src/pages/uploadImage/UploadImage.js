@@ -185,7 +185,7 @@ const UploadImage = (props) => {
         <div className="uploadImage__dndContainer d-flex justify-content-center align-items-center flex-column">
           <div className="uploadImage__dndTextDiv">
             <p className="uploadImage__dndTextHeading my-0 fw-bolder text-center">
-              Upload your Files
+              Upload your X-Ray
             </p>
             <p className="uploadImage__dndTextSubHeading my-0 text-center">
               File should be in jpeg, png or jpg

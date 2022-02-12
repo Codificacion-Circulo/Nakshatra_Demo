@@ -63,9 +63,9 @@ function ResetPassword() {
       <div className="container">
         <div className="login__container">
           <form onSubmit={handleSumbit}>
-            <h3>Password Reset</h3>
+            <h3 style={{color: "#064848"}}>Password Reset</h3>
             <div className="login__inputDiv form-group">
-              <label>Password</label>
+              <label><p className="mb-1">Password</p></label>
               <input
                 type="password"
                 className="form-control"
@@ -79,7 +79,7 @@ function ResetPassword() {
             </div>
 
             <div className="login__inputDiv form-group">
-              <label>Confirm Password</label>
+              <label><p className="mb-1">Confirm Password</p></label>
               <input
                 type="password"
                 className="form-control"
@@ -96,7 +96,7 @@ function ResetPassword() {
               Reset Password
             </button>
             <p className="forgot-password text-right">
-              Forgot <a href="/forgotPassword">password?</a>
+              Forgot <a href="/forgotPassword" style={{textDecoration: "none", color: "#064848"}}>password?</a>
             </p>
           </form>
         </div>

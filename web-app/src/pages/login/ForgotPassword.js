@@ -43,10 +43,10 @@ function ForgotPassword() {
       <div className="container">
         <div className="login__container">
           <form onSubmit={handleSumbit}>
-            <h3>Forgot Password</h3>
+            <h3 style={{color: "#064848"}}>Forgot Password</h3>
 
             <div className="login__inputDiv form-group">
-              <label>Email</label>
+              <label><p className="mb-1">Password</p></label>
               <input
                 type="email"
                 className="form-control"
@@ -62,7 +62,7 @@ function ForgotPassword() {
               Send Reset Link
             </button>
             <p className="forgot-password text-right">
-              Forgot <a href="#">password?</a>
+              Forgot <a href="#" style={{textDecoration: "none", color: "#064848"}}>password?</a>
             </p>
           </form>
         </div>

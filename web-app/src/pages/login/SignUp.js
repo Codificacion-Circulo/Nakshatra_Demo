@@ -65,7 +65,7 @@ function SignUp() {
       <div className="container">
         <div className="login__container">
           <form onSubmit={handleSumbit}>
-            <h3>Register</h3>
+            <h3 style={{color: "#064848"}}>Register</h3>
 
             <div className="login__inputDiv form-group">
               <label>Name</label>
@@ -82,7 +82,7 @@ function SignUp() {
             </div>
 
             <div className="login__inputDiv form-group">
-              <label>Email</label>
+              <label><p className="mb-1">Email</p></label>
               <input
                 type="email"
                 className="form-control"
@@ -96,7 +96,7 @@ function SignUp() {
             </div>
 
             <div className="login__inputDiv form-group">
-              <label>Password</label>
+              <label><p className="mb-1">Password</p></label>
               <input
                 type="password"
                 className="form-control"
@@ -110,7 +110,7 @@ function SignUp() {
             </div>
 
             <div className="login__inputDiv form-group">
-              <label>Confirm Password</label>
+              <label><p className="mb-1">Confirm Password</p></label>
               <input
                 type="password"
                 className="form-control"
@@ -127,7 +127,7 @@ function SignUp() {
               Register
             </button>
             <p className="forgot-password text-right">
-              Already registered <a href="/login">log in?</a>
+              Already registered <a href="/login" style={{textDecoration: "none", color: "#064848"}}>log in?</a>
             </p>
           </form>
         </div>

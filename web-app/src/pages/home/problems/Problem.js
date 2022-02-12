@@ -2,8 +2,10 @@ import "./Problem.css";
 import Problem1 from "../../../assets/problem1.jpg";
 import Problem2 from "../../../assets/problem2.png";
 import Problem3 from "../../../assets/problem3.jpeg";
+import Problem7 from "../../../assets/problem7.jpeg";
 import Problem4 from "../../../assets/problem4.png"
 import Problem5 from "../../../assets/problem5.png"
+import Problem6 from "../../../assets/problem6.png"
 
 const Problem = () => {
   return (
@@ -19,13 +21,13 @@ const Problem = () => {
           <div className="card-body">
             <h5 className="card-title text-center fs-3">Early Detection</h5>
             <p className="card-text text-center">
-              Early Detection without the need of a doctor which helps in saving millions of lives.
+              Early and quick detection with recommendations, precautions and best practices.
             </p>
           </div>
         </div>
 
 
-        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+        {/* <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
           <img src={Problem2} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title text-center fs-3">Faster Results</h5>
@@ -33,8 +35,17 @@ const Problem = () => {
               Able to detect Covid-19 faster than most RTPCR tests within seconds.
             </p>
           </div>
-        </div>
+        </div> */}
 
+        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+          <img src={Problem6} className="card-img-top" alt="..." height={"200px"}/>
+          <div className="card-body">
+            <h5 className="card-title text-center fs-3">User History</h5>
+            <p className="card-text text-center">
+              Access all your previous Chest X-ray test reports on the website.
+            </p>
+          </div>
+        </div>
 
         <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
           <img src={Problem3} className="card-img-top" alt="..." />
@@ -59,11 +70,22 @@ const Problem = () => {
 
 
         <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
+          <img src={Problem7} className="card-img-top" alt="..." />
+          <div className="card-body">
+            <h5 className="card-title text-center fs-3">Further Help</h5>
+            <p className="card-text text-center">
+              Precautions and safety measures recommended by best institutions.
+            </p>
+          </div>
+        </div>
+
+
+        <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
           <img src={Problem5} className="card-img-top" alt="..."/>
           <div className="card-body">
-            <h5 className="card-title text-center fs-4">Automation</h5>
+            <h5 className="card-title text-center fs-4">Multilayered Model</h5>
             <p className="card-text text-center">
-            Automate the work of Doctors in Pandemic times.
+            Multilayered Model for improving accuracy minimizing faults.
             </p>
           </div>
         </div>

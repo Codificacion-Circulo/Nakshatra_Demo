@@ -177,9 +177,9 @@ const Profile = () => {
 
       </div>
       <MDBRow className='row-cols-1 row-cols-md-2 g-4 p-4 d-flex justify-content-center'>
-        {details && details.results > 0 && details.data.data.map((el, index) => {
+        {details && details.results > 0 ? details.data.data.map((el, index) => {
           return <HistoryCard key={index} data={el}></HistoryCard>
-        })}
+        }) : <p>No History Available</p>}
       </MDBRow>
     </>
   );

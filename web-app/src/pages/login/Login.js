@@ -52,10 +52,10 @@ function Login() {
       <div className="container">
         <div className="login__container">
           <form onSubmit={handleSumbit}>
-            <h3>Log in</h3>
+            <h3 style={{color: "#064848"}}>Log in</h3>
 
             <div className="login__inputDiv form-group">
-              <label>Email</label>
+              <label><p className="mb-1">Email</p></label>
               <input
                 type="email"
                 className="form-control"
@@ -69,7 +69,7 @@ function Login() {
             </div>
 
             <div className="login__inputDiv form-group">
-              <label>Password</label>
+              <label><p className="mb-1">Password</p></label>
               <input
                 type="password"
                 className="form-control"
@@ -86,7 +86,7 @@ function Login() {
               Sign in
             </button>
             <p className="forgot-password text-right">
-              Forgot <a href="/forgotPassword">password?</a>
+              Forgot <a href="/forgotPassword" style={{textDecoration: "none", color: "#064848"}}>password?</a>
             </p>
           </form>
         </div>

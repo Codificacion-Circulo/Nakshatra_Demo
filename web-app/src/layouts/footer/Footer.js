@@ -6,9 +6,9 @@ import {
 const Footer = () => {
   return (
     <MDBFooter className='text-center text-white container-fluid foo' style={{ backgroundColor: '#d8efed' }}>
-      <div className='text-center text-dark p-3' style={{ backgroundColor: '#d8efed' }}>
-        © 2022 Copyright:
-        <a className='text-dark' href='/'>
+      <div className='text-center text-dark p-3 fw-bolder' style={{ backgroundColor: '#d8efed' }}>
+        © 2022 Copyright: &nbsp;
+        <a className='text-dark' href='/' style={{textDecoration: "none"}}>
         Alveoli
         </a>
       </div>
