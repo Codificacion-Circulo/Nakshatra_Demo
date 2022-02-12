@@ -1,11 +1,15 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import * as tf from "@tensorflow/tfjs";
 import { useDropzone } from "react-dropzone";
-import ResultDescCard from "../../components/resultDescCard/ResultDescCard";
 import "./UploadImage.css";
-
+import { Link } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // assest imports
 import fileUpload from "../../assets/fileUpload.png";
+
+toast.configure();
 
 const url = {
   model: "model.json",
@@ -19,7 +23,7 @@ const baseStyle = {
   color: "#bdbdbd",
   transition: "border .3s ease-in-out",
   padding: "3rem",
-  marginBottom: "2rem"
+  marginBottom: "2rem",
 };
 
 const activeStyle = {
@@ -38,7 +42,7 @@ const UploadImage = (props) => {
   const [model, setModel] = useState();
   const [files, setFiles] = useState([]);
   const [result, setResult] = useState("");
-  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadModel = async (url) => {
     try {
@@ -58,31 +62,41 @@ const UploadImage = (props) => {
   }, []);
 
   const handleUploadImage = () => {
-    const file = files[0];
-    console.log(file);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    console.log("before");
-    reader.onload = () => {
-      console.log("after");
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const tensor = tf.browser
-          .fromPixels(img)
-          .resizeBilinear([224, 224])
-          .toFloat();
-        const offset = tf.scalar(255.0);
-        const normalized = tensor.div(offset).expandDims(0);
-        const predictions = model.predict(normalized);
-        // const values = Array.from(predictions.dataSync());
-        var pIndex = tf.argMax(predictions, 1).dataSync();
-        var classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
-        // alert(classNames[pIndex]);
-        setResult(classNames[pIndex]);
+    try {
+      const file = files[0];
+      console.log(file);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      console.log("before");
+      reader.onload = () => {
+        console.log("after");
+        setLoading(true)
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          const tensor = tf.browser
+            .fromPixels(img)
+            .resizeBilinear([224, 224])
+            .toFloat();
+          const offset = tf.scalar(255.0);
+          const normalized = tensor.div(offset).expandDims(0);
+          const predictions = model.predict(normalized);
+          // const values = Array.from(predictions.dataSync());
+          var pIndex = tf.argMax(predictions, 1).dataSync();
+          var classNames = ["covid", "normal", "pneumonia", "tuberculosis"];
+          // alert(classNames[pIndex]);
+          setResult(classNames[pIndex]);
+          setLoading(false);
+        };
       };
-    };
-    setFiles([]);
+      setFiles([]);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -124,62 +138,64 @@ const UploadImage = (props) => {
     [files]
   );
 
-  const modalChangeHandler = () => {
-    setModal(false);
-  };
-
   return (
-    <div className="uploadImage__container container d-flex flex-column align-items-center">
-      <div className="uploadImage__dndContainer d-flex justify-content-center align-items-center flex-column">
-        <div className="uploadImage__dndTextDiv">
-          <p className="uploadImage__dndTextHeading my-0 fw-bolder text-center">
-            Upload your Files
-          </p>
-          <p className="uploadImage__dndTextSubHeading my-0 text-center">
-            File should be in jpeg, png or jpg
-          </p>
-        </div>
-        <div
-          className="uploadImage__dndPlaceDiv d-flex justify-content-center align-items-center flex-column"
-          {...getRootProps({ style })}
-        >
-          <input {...getInputProps()} className="uploadInput" />
-          {files && files.length === 0 ? (
-            <>
-              <img src={fileUpload} alt="file upload logo" className="px-5"/>
-              <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
-                Drag and Drop your Chest X-Ray here
-              </p>
-            </>
-          ) : (
-            <>
-            <img src="https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8eCUyMHJheXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="file upload logo" />
-            <p className="text-success mt-3">File Uploaded Successfully</p>
-            </>
-          )}
-        </div>
-        {/* {files.length > 0 && (
-          <p className="text-success">File Uploaded Successfully</p>
-        )} */}
-        <button className="uploadImage__uploadBtn" onClick={handleUploadImage}>
-          Check Image
-        </button>
-      </div>
-      {result && (
-        <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
-          <p className="text-center fw-bolder">Your Chest X-Ray is classfied as {result}</p>
+    <>
+      {loading && <LoadingSpinner />}
+      <div className="uploadImage__container container d-flex flex-column align-items-center">
+        <div className="uploadImage__dndContainer d-flex justify-content-center align-items-center flex-column">
+          <div className="uploadImage__dndTextDiv">
+            <p className="uploadImage__dndTextHeading my-0 fw-bolder text-center">
+              Upload your Files
+            </p>
+            <p className="uploadImage__dndTextSubHeading my-0 text-center">
+              File should be in jpeg, png or jpg
+            </p>
+          </div>
+          <div
+            className="uploadImage__dndPlaceDiv d-flex justify-content-center align-items-center flex-column"
+            {...getRootProps({ style })}
+          >
+            <input {...getInputProps()} className="uploadInput" />
+            {files && files.length === 0 ? (
+              <>
+                <img src={fileUpload} alt="file upload logo" className="px-5" />
+                <p className="uploadImage__dndPlaceSubHeading mt-3 my-0 text-center">
+                  Drag and Drop your Chest X-Ray here
+                </p>
+              </>
+            ) : (
+              <>
+                <img
+                  src="https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8eCUyMHJheXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                  alt="file upload logo"
+                />
+                <p className="text-success mt-3">File Uploaded Successfully</p>
+              </>
+            )}
+          </div>
           <button
             className="uploadImage__uploadBtn"
-            onClick={() => {
-              setModal(true);
-            }}
+            onClick={handleUploadImage}
           >
-            Know More
+            Check Image
           </button>
         </div>
-      )}
-      {modal && <ResultDescCard onClose={modalChangeHandler} />}
-    </div>
+        {result && (
+          <div className="uploadImage__resultDiv d-flex justify-content-center align-items-center flex-column">
+            <p className="text-center fw-bolder">
+              Your Chest X-Ray is classfied as {result}
+            </p>
+            <Link
+              to="/knowmore"
+              className="uploadImage__uploadBtn"
+              style={{ textDecoration: "none" }}
+            >
+              Know More
+            </Link>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

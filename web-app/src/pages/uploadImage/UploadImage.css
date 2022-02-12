@@ -52,6 +52,10 @@
     font-weight: bold;
 }
 
+.uploadImage__uploadBtn:hover {
+    color: #fff;
+}
+
 .uploadImage__resultDiv {
     margin: 2rem 0;
     width: 40%;

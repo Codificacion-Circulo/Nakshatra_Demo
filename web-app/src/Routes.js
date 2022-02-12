@@ -23,7 +23,7 @@ const Routes = () => {
                     <Route path="/profile">
                         <Profile />
                     </Route>
-                    <Route path="/k">
+                    <Route path="/knowmore">
                         <KnowMore />
                     </Route>
                     <Route path="/login">
