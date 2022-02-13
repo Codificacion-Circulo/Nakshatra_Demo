@@ -18,7 +18,9 @@ const Routes = () => {
                 </Route>
                 <Protected exact path="/upload" component={UploadImage} />
                 <Protected exact path="/profile" component={Profile} />
-                <Protected exact path="/knowmore/:result" component={KnowMore} />
+                <Route path="/knowmore/:result" exact>
+                    <KnowMore />
+                </Route>
                 <Route path="/login" exact>
                     <Login />
                 </Route>
