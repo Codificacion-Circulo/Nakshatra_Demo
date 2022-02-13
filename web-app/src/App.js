@@ -20,10 +20,10 @@ function App() {
         }
         if (commandData.command === "showUploadPage") {
           if(localStorage.getItem("token")){
-          history.push("/login")
+            history.push("/upload")
           }
           else {
-            history.push("/upload")
+            history.push("/login")
           }
         }
         if (commandData.command === "showProfilePage") {
