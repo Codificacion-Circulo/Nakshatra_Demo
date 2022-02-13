@@ -12,6 +12,9 @@ function App() {
       key: "16e640254ab52f4aa02148c35fd8d1c92e956eca572e1d8b807a3e2338fdd0dc/stage",
       rootEl: alanBtnContainer.current,
       onCommand: (commandData) => {
+        if (commandData.command === "showHomePage") {
+          history.push('/')
+        }
         if (commandData.command === "showLoginPage") {
           history.push("/login")
         }
