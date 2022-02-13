@@ -26,17 +26,6 @@ const Problem = () => {
           </div>
         </div>
 
-
-        {/* <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
-          <img src={Problem2} className="card-img-top" alt="..." />
-          <div className="card-body">
-            <h5 className="card-title text-center fs-3">Faster Results</h5>
-            <p className="card-text text-center">
-              Able to detect Covid-19 faster than most RTPCR tests within seconds.
-            </p>
-          </div>
-        </div> */}
-
         <div className="problem__cardsDiv  card" style={{ width: "22rem" }}>
           <img src={Problem6} className="card-img-top" alt="..." height={"200px"}/>
           <div className="card-body">
