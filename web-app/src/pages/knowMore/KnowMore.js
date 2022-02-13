@@ -87,26 +87,6 @@ const KnowMore = () => {
         <p>W.H.O recommendation for {result&&result}</p>
       </div>
       <div className="knowMore__containerDiv">
-        {/* <div className="knowMore__profileInfoContainer">
-          <div className="knowMore__profileDiv">
-            <img
-              src="https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
-              alt=""
-            />
-          </div>
-          <div className="knowMore__infoDiv d-flex flex-column align-items-center">
-            <div className="knowMore__infoHeading">
-              <p>Covid</p>
-            </div>
-            <div className="knowMore__infoSubHeading">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt sapiente excepturi dignissimos saepe sit, iste iusto
-                rem voluptas doloremque laudantium.
-              </p>
-            </div>
-          </div>
-        </div> */}
         <div className="knowMore__otherInfoDiv d-flex flex-column align-items-center">
           <div className="knowMore__otherInfoHeading">
             <p>Measures to Take</p>
