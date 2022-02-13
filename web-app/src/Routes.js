@@ -31,6 +31,9 @@ const Routes = () => {
                 <Route path="/resetPassword/:id" exact>
                     <ResetPassword />
                 </Route>
+                <Route path="*">
+                    <Redirect to="/"/>
+                </Route>
             </Switch>
         </Layout>
     );
