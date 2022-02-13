@@ -14,10 +14,7 @@ const Routes = () => {
         <Layout>
             <Switch>
                 <Route path='/' exact>
-                    <Redirect to='/home' />
-                </Route>
-                <Route path='/home' exact>
-                    <Home />
+                <Home />
                 </Route>
                 <Protected exact path="/upload" component={UploadImage} />
                 <Protected exact path="/profile" component={Profile} />
